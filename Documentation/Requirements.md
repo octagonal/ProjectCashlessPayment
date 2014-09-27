@@ -25,8 +25,8 @@
 
 ### Klant (D)
 - [ ] Kan zichzelf registreren om het systeem te gebruiken (D1)
-Kan zijn kaart opladen voor een bedrag van maximum 100 euro (D2)
-Kan het huidige saldo van zijn kaart controleren (D3)
+- [ ] Kan zijn kaart opladen voor een bedrag van maximum 100 euro (D2)
+- [ ] Kan het huidige saldo van zijn kaart controleren (D3)
 
 ### Kassasysteem: klant (F)
 - [ ] Kan controleren of een klant al geregistreerd is (F1)
@@ -72,7 +72,7 @@ Kan het huidige saldo van zijn kaart controleren (D3)
 - [ ] Kan opvragen welke medewerker een kassa bemand heeft (B42)
 
 ### Beheer klanten (B5)
-- [ ] Kan eenoverzicht van al zijn klanten weergeven (B51)
+- [ ] Kan een overzicht van al zijn klanten weergeven (B51)
 - [ ] Kan gegevens (ook het saldo) van een klant wijzigen (B52)
 
 ### Beheer statistieken (B6)
