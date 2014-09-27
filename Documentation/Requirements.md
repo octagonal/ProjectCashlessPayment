@@ -1,4 +1,5 @@
 ﻿---
+
 ## Web App: A
 
 ### IT bedrijf: Beheer verenigingen (A1)
@@ -21,6 +22,7 @@
 - [ ] Kan een logboek van foutmeldingen en waarschuwingen van de kassa’s opvragen (A32)
 
 ---
+
 ## Desktop App: D+F
 
 ### Klant (D)
@@ -34,6 +36,7 @@
 - [ ] Kan foutmeldingen en waarschuwingen opslaan in het logboek (F3)
 
 ---
+
 ## Desktop App: C+E
 
 ### Vereniging: medewerker (C)
@@ -49,6 +52,7 @@
 - [ ] Kan foutmeldingen en waarschuwingen opslaan in het logboek (E4)
 
 ---
+
 ## Desktop App: B
 
 ### Management: Beheer account (B1)
