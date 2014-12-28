@@ -20,23 +20,24 @@ namespace nmct.ba.cashlessproject.web.Controllers
         // GET: Organisation/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            return View(OrganisationDA.GetOrganisation(id));
         }
 
         // GET: Organisation/Create
         public ActionResult Create()
         {
-            return View();
+            return View(new Organisation());
         }
 
         // POST: Organisation/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Organisation item)
         {
             try
             {
                 // TODO: Add insert logic here
 
+                OrganisationDA.InsertOrganisation(item);
                 return RedirectToAction("Index");
             }
             catch

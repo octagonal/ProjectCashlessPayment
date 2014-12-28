@@ -7,6 +7,7 @@ using System.Web;
 
 using nmct.ba.cashlessproject.model.it;
 using System.Security.Claims;
+using nmct.ba.cashlessproject.web.Models;
 
 namespace nmct.ba.cashlessproject.web.App_Start
 {
