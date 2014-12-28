@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.Common;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 
@@ -74,7 +75,7 @@ namespace nmct.ba.cashlessproject.web.Helper
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Debug.WriteLine(ex.Message);
                 if (reader != null)
                     reader.Close();
                 if (command != null)
@@ -96,7 +97,7 @@ namespace nmct.ba.cashlessproject.web.Helper
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Debug.WriteLine(ex.Message);
                 if (command != null)
                     ReleaseConnection(command.Connection);
                 return 0;
@@ -121,7 +122,7 @@ namespace nmct.ba.cashlessproject.web.Helper
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Debug.WriteLine(ex.Message);
                 if (command != null)
                     ReleaseConnection(command.Connection);
                 return 0;
@@ -148,7 +149,7 @@ namespace nmct.ba.cashlessproject.web.Helper
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Debug.WriteLine(ex.Message);
                 ReleaseConnection(con);
                 throw;
             }
@@ -164,7 +165,7 @@ namespace nmct.ba.cashlessproject.web.Helper
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Debug.WriteLine(ex.Message);
                 ReleaseConnection(con);
                 throw;
             }
@@ -198,7 +199,7 @@ namespace nmct.ba.cashlessproject.web.Helper
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Debug.WriteLine(ex.Message);
                 throw;
             }
         }
@@ -214,7 +215,7 @@ namespace nmct.ba.cashlessproject.web.Helper
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Debug.WriteLine(ex.Message);
                 throw;
             }
         }
@@ -236,7 +237,7 @@ namespace nmct.ba.cashlessproject.web.Helper
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Debug.WriteLine(ex.Message);
                 throw;
             }
         }

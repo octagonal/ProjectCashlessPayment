@@ -7,6 +7,7 @@ using System.Data.Common;
 using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Hosting;
 
 namespace nmct.ba.cashlessproject.web.Models
 {
@@ -141,19 +142,22 @@ namespace nmct.ba.cashlessproject.web.Models
 
         public static int InsertOrganisation(Organisation o)
         {
+            o.DbName = "CashlessCustomer_" + o.DbName;
+            o = EncryptModel(o);
+
             string sql = "INSERT INTO Organisation VALUES(@Login,@Password,@DbName,@DbLogin,@DbPassword,@OrganisationName,@Address,@Email,@Phone)";
-            DbParameter par1 = Database.AddParameter("AdminDB", "@Login",      Cryptography.Encrypt(o.Login));
-            DbParameter par2 = Database.AddParameter("AdminDB", "@Password",   Cryptography.Encrypt(o.Password));
-            DbParameter par3 = Database.AddParameter("AdminDB", "@DbName",     Cryptography.Encrypt(o.DbName));
-            DbParameter par4 = Database.AddParameter("AdminDB", "@DbLogin",    Cryptography.Encrypt(o.DbLogin));
-            DbParameter par5 = Database.AddParameter("AdminDB", "@DbPassword", Cryptography.Encrypt(o.DbPassword));
+            DbParameter par1 = Database.AddParameter("AdminDB", "@Login", o.Login);
+            DbParameter par2 = Database.AddParameter("AdminDB", "@Password", o.Password);
+            DbParameter par3 = Database.AddParameter("AdminDB", "@DbName", o.DbName);
+            DbParameter par4 = Database.AddParameter("AdminDB", "@DbLogin", o.DbLogin);
+            DbParameter par5 = Database.AddParameter("AdminDB", "@DbPassword", o.DbPassword);
             DbParameter par6 = Database.AddParameter("AdminDB", "@OrganisationName", o.OrganisationName);
             DbParameter par7 = Database.AddParameter("AdminDB", "@Address", o.Address);
             DbParameter par8 = Database.AddParameter("AdminDB", "@Email", o.Email);
             DbParameter par9 = Database.AddParameter("AdminDB", "@Phone", o.Phone);
             int id = Database.InsertData(Database.GetConnection("AdminDB"), sql, par1, par2, par3, par4, par5, par6, par7, par8, par9);
 
-            CreateDatabase(o);
+            CreateDatabase(DecryptModel(o));
 
             return id;
         }
@@ -161,8 +165,8 @@ namespace nmct.ba.cashlessproject.web.Models
         private static void CreateDatabase(Organisation o)
         {
             // create the actu  al database
-            //string create = File.ReadAllText(HostingEnvironment.MapPath(@"~/App_Data/create.txt")); only for the web
-            string create = File.ReadAllText(@"..\..\Data\create.txt"); // only for desktop
+            string create = File.ReadAllText(HostingEnvironment.MapPath(@"~/App_Data/create.txt")); // only for the web
+            //string create = File.ReadAllText(@"..\..\Data\create.txt"); // only for desktop
             string sql = create.Replace("@@DbName", o.DbName).Replace("@@DbLogin", o.DbLogin).Replace("@@DbPassword", o.DbPassword);
             foreach (string commandText in RemoveGo(sql))
             {
@@ -175,8 +179,8 @@ namespace nmct.ba.cashlessproject.web.Models
             {
                 trans = Database.BeginTransaction("AdminDB");
 
-                //string fill = File.ReadAllText(HostingEnvironment.MapPath(@"~/App_Data/fill.txt")); // only for the web
-                string fill = File.ReadAllText(@"..\..\Data\fill.txt"); // only for desktop
+                string fill = File.ReadAllText(HostingEnvironment.MapPath(@"~/App_Data/fill.txt")); // only for the web
+                //string fill = File.ReadAllText(@"..\..\Data\fill.txt"); // only for desktop
                 string sql2 = fill.Replace("@@DbName", o.DbName).Replace("@@DbLogin", o.DbLogin).Replace("@@DbPassword", o.DbPassword);
 
                 foreach (string commandText in RemoveGo(sql2))
