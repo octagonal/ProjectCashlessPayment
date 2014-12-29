@@ -13,14 +13,13 @@ namespace nmct.ba.cashlessproject.web.Controllers
         // GET: Organisation
         public ActionResult Index()
         {
-            List<Organisation> orgs = OrganisationDA.GetOrganisations();
-            return View(orgs);
+            return View(OrganisationDA.ReadOrganisations());
         }
 
         // GET: Organisation/Details/5
         public ActionResult Details(int id)
         {
-            return View(OrganisationDA.GetOrganisation(id));
+            return View(OrganisationDA.ReadOrganisation(id));
         }
 
         // GET: Organisation/Create
@@ -35,9 +34,7 @@ namespace nmct.ba.cashlessproject.web.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
-
-                OrganisationDA.InsertOrganisation(item);
+                OrganisationDA.CreateOrganisation(item);
                 return RedirectToAction("Index");
             }
             catch
@@ -47,18 +44,21 @@ namespace nmct.ba.cashlessproject.web.Controllers
         }
 
         // GET: Organisation/Edit/5
+        [HttpGet]
         public ActionResult Edit(int id)
-        {
-            return View();
+        {                
+            // TODO: Add update logic here
+
+            return View(OrganisationDA.ReadOrganisation(id));
         }
 
         // POST: Organisation/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Organisation item)
         {
             try
             {
-                // TODO: Add update logic here
+                OrganisationDA.UpdateOrganisation(item);
 
                 return RedirectToAction("Index");
             }
@@ -71,17 +71,16 @@ namespace nmct.ba.cashlessproject.web.Controllers
         // GET: Organisation/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            return View(OrganisationDA.ReadOrganisation(id));
         }
 
         // POST: Organisation/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(Organisation item)
         {
             try
             {
-                // TODO: Add delete logic here
-
+                OrganisationDA.DeleteOrganisation(item.ID);
                 return RedirectToAction("Index");
             }
             catch

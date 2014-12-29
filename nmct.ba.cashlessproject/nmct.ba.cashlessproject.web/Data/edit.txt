@@ -1,0 +1,18 @@
+﻿use [master]
+GO
+ALTER DATABASE [@@OldDbName] MODIFY NAME [@@DbName]
+GO
+ALTER DATABASE [@@DbName]
+MODIFY FILE ( NAME = N'@@DbName', FILENAME = "FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL12.MSSQLSERVER\MSSQL\DATA\"@@DbName.mdf) 
+GO 
+CREATE LOGIN [@@DbLogin] WITH PASSWORD=N'@@DbPassword', DEFAULT_DATABASE=[@@DbName], DEFAULT_LANGUAGE=[us_english], CHECK_EXPIRATION=OFF, CHECK_POLICY=OFF
+GO
+USE [@@DbName]
+GO
+/****** Object:  User [LoginUser]    Script Date: 19/11/2014 20:35:46 ******/
+CREATE USER [LoginUser] FOR LOGIN [@@DbLogin] WITH DEFAULT_SCHEMA=[dbo]
+GO
+ALTER ROLE [db_datareader] ADD MEMBER [LoginUser]
+GO
+ALTER ROLE [db_datawriter] ADD MEMBER [LoginUser]
+GO

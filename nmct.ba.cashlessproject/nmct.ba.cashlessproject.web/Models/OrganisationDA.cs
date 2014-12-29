@@ -13,6 +13,34 @@ namespace nmct.ba.cashlessproject.web.Models
 {
     public class OrganisationDA
     {
+        #region Public CRUD functies
+        public static int UpdateOrganisation(Organisation item)
+        {
+            return EditOrganisation(item);
+        }
+
+        public static int DeleteOrganisation(int id)
+        {
+            return DeleteOrganisation(GetOrganisation(id));
+        }
+
+        public static Organisation ReadOrganisation(int id)
+        {
+            return GetOrganisation(id);
+        }
+
+        public static List<Organisation> ReadOrganisations()
+        {
+            return GetOrganisations();
+        }
+
+        public static int CreateOrganisation(Organisation o)
+        {
+            return InsertOrganisation(o);
+        }
+        #endregion
+
+        #region Logica
         public static Organisation CheckCredentials(string username, string password)
         {
             string sql = "SELECT * FROM Organisation WHERE Login=@Login AND Password=@Password";
@@ -83,7 +111,7 @@ namespace nmct.ba.cashlessproject.web.Models
             };
         }
 
-        public static List<Organisation> GetOrganisations()
+        private static List<Organisation> GetOrganisations()
         {
             List<Organisation> list = new List<Organisation>();
             string sql = "SELECT * FROM Organisation";
@@ -96,7 +124,8 @@ namespace nmct.ba.cashlessproject.web.Models
 
             return list;
         }
-        public static Organisation GetOrganisation(int id)
+
+        private static Organisation GetOrganisation(int id)
         {
             Organisation item = new Organisation();
             string sql = "SELECT * FROM Organisation WHERE Id=@Id";
@@ -110,7 +139,7 @@ namespace nmct.ba.cashlessproject.web.Models
             return item;
         }
 
-        public static Organisation GetOrganisationByLoginAndPassword(string username, string password)
+        private static Organisation GetOrganisationByLoginAndPassword(string username, string password)
         {
             string sql = "SELECT * FROM Organisation WHERE Login=@Login AND Password=@Password";
             DbParameter par1 = Database.AddParameter("AdminDB", "@Login", username);
@@ -140,7 +169,30 @@ namespace nmct.ba.cashlessproject.web.Models
             }
         }
 
-        public static int InsertOrganisation(Organisation o)
+        private static int EditOrganisation(Organisation o)
+        {
+            //o.DbName = "CashlessCustomer_" + o.DbName;
+            o = EncryptModel(o);
+
+            string sql = "UPDATE Organisation SET Login=@Login,Password=@Password,DbName=@DbName,DbLogin=@DbLogin,DbPassword=@DbPassword,OrganisationName=@OrganisationName,Address=@Address,Email=@Email,Phone=@Phone WHERE ID=@ID";
+            DbParameter par1  = Database.AddParameter("AdminDB", "@Login", o.Login);
+            DbParameter par2  = Database.AddParameter("AdminDB", "@Password", o.Password);
+            DbParameter par3  = Database.AddParameter("AdminDB", "@DbName", o.DbName);
+            DbParameter par4  = Database.AddParameter("AdminDB", "@DbLogin", o.DbLogin);
+            DbParameter par5  = Database.AddParameter("AdminDB", "@DbPassword", o.DbPassword);
+            DbParameter par6  = Database.AddParameter("AdminDB", "@OrganisationName", o.OrganisationName);
+            DbParameter par7  = Database.AddParameter("AdminDB", "@Address", o.Address);
+            DbParameter par8  = Database.AddParameter("AdminDB", "@Email", o.Email);
+            DbParameter par9  = Database.AddParameter("AdminDB", "@Phone", o.Phone);
+            DbParameter par10 = Database.AddParameter("AdminDB", "@ID", o.ID);
+            int idDb = Database.InsertData(Database.GetConnection("AdminDB"), sql, par1, par2, par3, par4, par5, par6, par7, par8, par9, par10);
+
+            CreateDatabase(DecryptModel(o));
+
+            return idDb;
+
+        }
+        private static int InsertOrganisation(Organisation o)
         {
             o.DbName = "CashlessCustomer_" + o.DbName;
             o = EncryptModel(o);
@@ -159,6 +211,14 @@ namespace nmct.ba.cashlessproject.web.Models
 
             CreateDatabase(DecryptModel(o));
 
+            return id;
+        }
+
+        private static int DeleteOrganisation(Organisation o)
+        {
+            string sql = "DELETE FROM Organisation WHERE ID=@ID";
+            DbParameter par1 = Database.AddParameter("AdminDB", "@ID", o.ID);
+            int id = Database.InsertData(Database.GetConnection("AdminDB"), sql, par1);
             return id;
         }
 
@@ -204,6 +264,6 @@ namespace nmct.ba.cashlessproject.web.Models
             string[] commandTexts = input.Split(splitter, StringSplitOptions.RemoveEmptyEntries);
             return commandTexts;
         }
-
+        #endregion
     }
 }

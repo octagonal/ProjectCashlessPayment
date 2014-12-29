@@ -208,7 +208,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -246,6 +248,8 @@
     <Content Include="Views\Organisation\Index.cshtml" />
     <Content Include="Views\Organisation\Details.cshtml" />
     <Content Include="Views\Organisation\Create.cshtml" />
+    <Content Include="Views\Organisation\Edit.cshtml" />
+    <Content Include="Views\Organisation\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
