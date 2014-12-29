@@ -8,33 +8,33 @@ using System.Web.Mvc;
 
 namespace nmct.ba.cashlessproject.web.Controllers
 {
-    public class OrganisationController : Controller
+    public class RegisterController : Controller
     {
-        // GET: Organisation
+        // GET: Register
         public ActionResult Index()
         {
-            return View(OrganisationDA.ReadOrganisations());
+            return View(RegisterDA.ReadRegisters());
         }
 
-        // GET: Organisation/Details/5
+        // GET: Register/Details/5
         public ActionResult Details(int id)
         {
-            return View(OrganisationDA.ReadOrganisation(id));
+            return View(RegisterDA.ReadRegister(id));
         }
 
-        // GET: Organisation/Create
+        // GET: Register/Create
         public ActionResult Create()
         {
-            return View(new Organisation());
+            return View(new Register());
         }
 
-        // POST: Organisation/Create
+        // POST: Register/Create
         [HttpPost]
-        public ActionResult Create(Organisation item)
+        public ActionResult Create(Register item)
         {
             try
             {
-                OrganisationDA.CreateOrganisation(item);
+                RegisterDA.CreateRegister(item);
                 return RedirectToAction("Index");
             }
             catch
@@ -43,20 +43,20 @@ namespace nmct.ba.cashlessproject.web.Controllers
             }
         }
 
-        // GET: Organisation/Edit/5
+        // GET: Register/Edit/5
         [HttpGet]
         public ActionResult Edit(int id)
         {                
-            return View(OrganisationDA.ReadOrganisation(id));
+            return View(RegisterDA.ReadRegister(id));
         }
 
-        // POST: Organisation/Edit/5
+        // POST: Register/Edit/5
         [HttpPost]
-        public ActionResult Edit(Organisation item)
+        public ActionResult Edit(Register item)
         {
             try
             {
-                OrganisationDA.UpdateOrganisation(item);
+                RegisterDA.UpdateRegister(item);
 
                 return RedirectToAction("Index");
             }
@@ -66,19 +66,19 @@ namespace nmct.ba.cashlessproject.web.Controllers
             }
         }
 
-        // GET: Organisation/Delete/5
+        // GET: Register/Delete/5
         public ActionResult Delete(int id)
         {
-            return View(OrganisationDA.ReadOrganisation(id));
+            return View(RegisterDA.ReadRegister(id));
         }
 
-        // POST: Organisation/Delete/5
+        // POST: Register/Delete/5
         [HttpPost]
-        public ActionResult Delete(Organisation item)
+        public ActionResult Delete(Register item)
         {
             try
             {
-                OrganisationDA.DeleteOrganisation(item.ID);
+                RegisterDA.DeleteRegister(item.ID);
                 return RedirectToAction("Index");
             }
             catch

@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cryptography.cs" />
+    <Compile Include="nmct.ba.cashlessproject.model.it\Organisation_Register.cs" />
     <Compile Include="nmct.ba.cashlessproject.model.it\Errorlog.cs" />
     <Compile Include="nmct.ba.cashlessproject.model.it\Organisations.cs" />
     <Compile Include="nmct.ba.cashlessproject.model.it\Registers.cs" />
