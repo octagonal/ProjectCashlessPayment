@@ -171,7 +171,6 @@ namespace nmct.ba.cashlessproject.web.Models
 
         private static int EditOrganisation(Organisation o)
         {
-            //o.DbName = "CashlessCustomer_" + o.DbName;
             o = EncryptModel(o);
 
             string sql = "UPDATE Organisation SET Login=@Login,Password=@Password,DbName=@DbName,DbLogin=@DbLogin,DbPassword=@DbPassword,OrganisationName=@OrganisationName,Address=@Address,Email=@Email,Phone=@Phone WHERE ID=@ID";
@@ -186,9 +185,6 @@ namespace nmct.ba.cashlessproject.web.Models
             DbParameter par9  = Database.AddParameter("AdminDB", "@Phone", o.Phone);
             DbParameter par10 = Database.AddParameter("AdminDB", "@ID", o.ID);
             int idDb = Database.InsertData(Database.GetConnection("AdminDB"), sql, par1, par2, par3, par4, par5, par6, par7, par8, par9, par10);
-
-            CreateDatabase(DecryptModel(o));
-
             return idDb;
 
         }
