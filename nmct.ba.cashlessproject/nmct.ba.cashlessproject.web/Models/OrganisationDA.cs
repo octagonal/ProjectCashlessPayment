@@ -14,27 +14,23 @@ namespace nmct.ba.cashlessproject.web.Models
     public class OrganisationDA
     {
         #region Public CRUD functies
-        public static int UpdateOrganisation(Organisation item)
+        public static int                   UpdateOrganisation(Organisation item)
         {
             return EditOrganisation(item);
         }
-
-        public static int DeleteOrganisation(int id)
+        public static int                   DeleteOrganisation(int id)
         {
             return DeleteOrganisation(GetOrganisation(id));
         }
-
-        public static Organisation ReadOrganisation(int id)
+        public static Organisation          ReadOrganisation(int id)
         {
             return GetOrganisation(id);
         }
-
-        public static List<Organisation> ReadOrganisations()
+        public static List<Organisation>    ReadOrganisations()
         {
             return GetOrganisations();
         }
-
-        public static int CreateOrganisation(Organisation o)
+        public static int                   CreateOrganisation(Organisation o)
         {
             return InsertOrganisation(o);
         }
