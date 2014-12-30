@@ -17,15 +17,27 @@ namespace nmct.ba.cashlessproject.web.Models.VM
             ORInstance = new Organisation_Register();
         }
 
+        public static List<Organisation_RegisterVM> FillVMList()
+        {
+            List<Organisation_Register> orgs = Organisation_RegisterDA.ReadOrganisation_Registers();
+            List<Organisation_RegisterVM> vmlist = new List<Organisation_RegisterVM>();
+            foreach (Organisation_Register item in orgs)
+            {
+                vmlist.Add(new Organisation_RegisterVM() { ORInstance = item });
+            }
+
+            return vmlist;
+        }
+
         private Organisation_Register _orInstance;
         public Organisation_Register ORInstance
         {
             get { return _orInstance; }
-            set { _orInstance = value; }
+            set { _orInstance = value;}
         }
 
         private List<Register> _registerList;
-        private List<Register> RegisterList
+        public List<Register> RegisterList
         {
             get { return _registerList; }
             set { _registerList = value; }
@@ -36,7 +48,7 @@ namespace nmct.ba.cashlessproject.web.Models.VM
         }
 
         private List<Organisation> _organisationList;
-        private List<Organisation> OrganisationList
+        public List<Organisation> OrganisationList
         {
             get { return _organisationList; }
             set { _organisationList = value; }
@@ -61,8 +73,21 @@ namespace nmct.ba.cashlessproject.web.Models.VM
             get { return _newOrgID; }
             set { _newOrgID = value; }
         }
-        
-        
-        
+
+        private string _regFriendlyName;
+
+        public string RegFriendlyName
+        {
+            get { return ORInstance.RegisterID + " (" + RegisterList.Find(x => x.ID == ORInstance.RegisterID).RegisterName + ")"; }
+            //set { _regFriendlyName = RegisterList.Find(x => x.ID == ORInstance.RegisterID).RegisterName; }
+        }
+
+        private string _orgFriendlyName;
+
+        public string OrgFriendlyName
+        {
+            get { return ORInstance.OrganisationID + " (" + OrganisationList.Find(x => x.ID == ORInstance.OrganisationID).OrganisationName + ")"; }
+            //set { _orgFriendlyName = OrganisationList.Find(x => x.ID == ORInstance.OrganisationID).OrganisationName; }
+        }
     }
 }

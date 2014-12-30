@@ -1,4 +1,4 @@
-﻿@model nmct.ba.cashlessproject.model.it.Organisation_Register
+﻿@model nmct.ba.cashlessproject.web.Models.VM.Organisation_RegisterVM
 
 @{
     ViewBag.Title = "Delete";
@@ -12,35 +12,35 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.OrganisationID)
+            @Html.DisplayNameFor(model => model.ORInstance.OrganisationID)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.OrganisationID)
+            @Html.DisplayFor(model => model.ORInstance.OrganisationID) (@Html.DisplayFor(model => model.OrgFriendlyName))
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.RegisterID)
+            @Html.DisplayNameFor(model => model.ORInstance.RegisterID)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.RegisterID)
+            @Html.DisplayFor(model => model.ORInstance.RegisterID) (@Html.DisplayFor(model => model.RegFriendlyName))
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.FromDate)
+            @Html.DisplayNameFor(model => model.ORInstance.FromDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.FromDate)
+            @Html.DisplayFor(model => model.ORInstance.FromDate)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.UntilDate)
+            @Html.DisplayNameFor(model => model.ORInstance.UntilDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.UntilDate)
+            @Html.DisplayFor(model => model.ORInstance.UntilDate)
         </dd>
 
     </dl>

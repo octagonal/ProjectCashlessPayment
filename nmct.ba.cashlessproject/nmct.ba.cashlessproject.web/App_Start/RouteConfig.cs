@@ -20,8 +20,8 @@ namespace nmct.ba.cashlessproject.web
             );
 
             routes.MapRoute(
-                "Organisation_Register",
-                "Organisation_Register/{action}/{orgid}/{regid}",
+                "Assign_To_Organisation",
+                "Assign_To_Organisation/{action}/{orgid}/{regid}",
                 new { controller = "Organisation_RegisterController", action = "Index", orgid = UrlParameter.Optional, regid = UrlParameter.Optional }
             );
         }

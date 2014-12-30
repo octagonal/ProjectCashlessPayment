@@ -179,6 +179,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helper\Database.cs" />
+    <Compile Include="Helper\MiscModelHelpers.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CustomerDA.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -265,6 +266,9 @@
     <Content Include="Views\Organisation_Register\Delete.cshtml" />
     <Content Include="Views\Organisation_Register\Edit.cshtml" />
     <Content Include="Views\Organisation_Register\Create.cshtml" />
+    <Content Include="Views\Shared\_OrganisationPartial.cshtml" />
+    <Content Include="Views\Shared\_Organisation_RegisterPartial.cshtml" />
+    <Content Include="Views\Shared\_RegisterPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
