@@ -97,6 +97,7 @@ namespace nmct.ba.cashlessproject.web.Helper
             }
             catch (Exception ex)
             {
+                throw ex;
                 Debug.WriteLine(ex.Message);
                 if (command != null)
                     ReleaseConnection(command.Connection);
