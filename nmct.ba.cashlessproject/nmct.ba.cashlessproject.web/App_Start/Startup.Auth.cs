@@ -6,6 +6,8 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using nmct.ba.cashlessproject.web.Models;
+using Microsoft.Owin.Security.OAuth;
+using nmct.ba.cashlessproject.web.App_Start;
 
 namespace nmct.ba.cashlessproject.web
 {
@@ -22,6 +24,17 @@ namespace nmct.ba.cashlessproject.web
             // Enable the application to use a cookie to store information for the signed in user
             // and to use a cookie to temporarily store information about a user logging in with a third party login provider
             // Configure the sign in cookie
+
+            app.UseOAuthAuthorizationServer(new OAuthAuthorizationServerOptions()
+            {
+                AllowInsecureHttp = true,
+                TokenEndpointPath = new PathString("/token"),
+                AccessTokenExpireTimeSpan = TimeSpan.FromHours(8),
+                Provider = new SimpleAuthorizationServerProvider()
+            });
+
+            app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
+
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,

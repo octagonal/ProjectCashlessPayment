@@ -74,15 +74,11 @@ namespace nmct.ba.cashlessproject.web.Models.VM
             set { _newOrgID = value; }
         }
 
-        private string _regFriendlyName;
-
         public string RegFriendlyName
         {
             get { return ORInstance.RegisterID + " (" + RegisterList.Find(x => x.ID == ORInstance.RegisterID).RegisterName + ")"; }
             //set { _regFriendlyName = RegisterList.Find(x => x.ID == ORInstance.RegisterID).RegisterName; }
         }
-
-        private string _orgFriendlyName;
 
         public string OrgFriendlyName
         {

@@ -44,12 +44,10 @@
     <Compile Include="nmct.ba.cashlessproject.model.it\Errorlog.cs" />
     <Compile Include="nmct.ba.cashlessproject.model.it\Organisations.cs" />
     <Compile Include="nmct.ba.cashlessproject.model.it\Registers.cs" />
-    <Compile Include="nmct.ba.cashlessproject.model.klant\Customers.cs" />
-    <Compile Include="nmct.ba.cashlessproject.model.klant\Employee.cs" />
-    <Compile Include="nmct.ba.cashlessproject.model.klant\Errorlog.cs" />
-    <Compile Include="nmct.ba.cashlessproject.model.klant\Products.cs" />
-    <Compile Include="nmct.ba.cashlessproject.model.klant\Registers.cs" />
-    <Compile Include="nmct.ba.cashlessproject.model.klant\Sales.cs" />
+    <Compile Include="nmct.ba.cashlessproject.model.it\Customers.cs" />
+    <Compile Include="nmct.ba.cashlessproject.model.it\Employee.cs" />
+    <Compile Include="nmct.ba.cashlessproject.model.it\Products.cs" />
+    <Compile Include="nmct.ba.cashlessproject.model.it\Sales.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

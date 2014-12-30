@@ -161,6 +161,7 @@ namespace nmct.ba.cashlessproject.web.Models
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 return null;
             }
         }
@@ -244,7 +245,6 @@ namespace nmct.ba.cashlessproject.web.Models
             }
             catch (Exception ex)
             {
-                throw ex;
                 trans.Rollback();
                 Console.WriteLine(ex.Message);
             }
