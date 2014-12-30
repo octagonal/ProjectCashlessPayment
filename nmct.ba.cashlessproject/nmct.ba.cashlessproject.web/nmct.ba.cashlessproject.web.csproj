@@ -183,8 +183,10 @@
     <Compile Include="Models\CustomerDA.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Organisation_RegisterDA.cs" />
     <Compile Include="Models\RegisterDA.cs" />
     <Compile Include="Models\OrganisationDA.cs" />
+    <Compile Include="Models\VM\Organisation_RegisterVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -258,6 +260,10 @@
     <Content Include="Views\Register\Create.cshtml" />
     <Content Include="Views\Register\Edit.cshtml" />
     <Content Include="Views\Register\Delete.cshtml" />
+    <Content Include="Views\Organisation_Register\Index.cshtml" />
+    <Content Include="Views\Organisation_Register\Details.cshtml" />
+    <Content Include="Views\Organisation_Register\Delete.cshtml" />
+    <Content Include="Views\Organisation_Register\Edit.cshtml" />
     <Content Include="Views\Organisation_Register\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>

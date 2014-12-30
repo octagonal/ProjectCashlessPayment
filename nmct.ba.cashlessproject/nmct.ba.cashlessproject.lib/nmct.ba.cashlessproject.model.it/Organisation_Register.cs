@@ -8,17 +8,17 @@ namespace nmct.ba.cashlessproject.model.it
 {
     public class Organisation_Register
     {
-        private Organisation _organisationID;
+        private int _organisationID;
 
-        public Organisation OrganisationID
+        public int OrganisationID
         {   
             get { return _organisationID; }
             set { _organisationID = value; }
         }
 
-        private Register _registerID;
+        private int _registerID;
 
-        public Register RegisterID
+        public int RegisterID
         {
             get { return _registerID; }
             set { _registerID = value; }

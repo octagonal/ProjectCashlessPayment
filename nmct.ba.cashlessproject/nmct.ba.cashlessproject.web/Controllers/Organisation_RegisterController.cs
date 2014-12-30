@@ -1,5 +1,9 @@
-﻿using System;
+﻿using nmct.ba.cashlessproject.model.it;
+using nmct.ba.cashlessproject.web.Models;
+using nmct.ba.cashlessproject.web.Models.VM;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -11,29 +15,31 @@ namespace nmct.ba.cashlessproject.web.Controllers
         // GET: Organisation_Register
         public ActionResult Index()
         {
-            return View();
+            return View(Organisation_RegisterDA.ReadOrganisation_Registers());
         }
 
-        // GET: Organisation_Register/Details/5
-        public ActionResult Details(int id)
+        // GET: Organisation_Register/Details/5/1
+        public ActionResult Details(int regId, int orgId)
         {
-            return View();
+            return View(Organisation_RegisterDA.ReadOrganisation_Register(regId,orgId));
         }
 
         // GET: Organisation_Register/Create
         public ActionResult Create()
         {
-            return View();
+            Organisation_RegisterVM orgreg = new Organisation_RegisterVM();
+            //Debug.WriteLine()
+            return View(orgreg);
         }
 
         // POST: Organisation_Register/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Organisation_RegisterVM item)
         {
             try
             {
                 // TODO: Add insert logic here
-
+                Organisation_RegisterDA.CreateOrganisation_Register(item.ORInstance);
                 return RedirectToAction("Index");
             }
             catch
@@ -43,19 +49,18 @@ namespace nmct.ba.cashlessproject.web.Controllers
         }
 
         // GET: Organisation_Register/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int regId, int orgId)
         {
-            return View();
+            return View(new Organisation_RegisterVM() { ORInstance = Organisation_RegisterDA.ReadOrganisation_Register(regId, orgId) });
         }
 
         // POST: Organisation_Register/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Organisation_RegisterVM item)
         {
             try
             {
-                // TODO: Add update logic here
-
+                Organisation_RegisterDA.UpdateOrganisation_Register(item.ORInstance, item.NewOrgID, item.NewRegID);
                 return RedirectToAction("Index");
             }
             catch
@@ -64,20 +69,21 @@ namespace nmct.ba.cashlessproject.web.Controllers
             }
         }
 
-        // GET: Organisation_Register/Delete/5
-        public ActionResult Delete(int id)
+        // GET: Organisation_Register/Delete/5/4
+        [HttpGet]
+        public ActionResult Delete(int regId, int orgId)
         {
-            return View();
+            return View(Organisation_RegisterDA.ReadOrganisation_Register(regId,orgId));
         }
 
-        // POST: Organisation_Register/Delete/5
+        // POST: Organisation_Register/Delete/5/4
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [ActionName("Delete")]
+        public ActionResult DeleteOrgReg(int regId, int orgId)
         {
             try
             {
-                // TODO: Add delete logic here
-
+                Organisation_RegisterDA.DeleteOrganisation_Register(regId, orgId);
                 return RedirectToAction("Index");
             }
             catch

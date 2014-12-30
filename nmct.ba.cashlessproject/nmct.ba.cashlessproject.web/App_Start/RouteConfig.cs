@@ -18,6 +18,12 @@ namespace nmct.ba.cashlessproject.web
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                "Organisation_Register",
+                "Organisation_Register/{action}/{orgid}/{regid}",
+                new { controller = "Organisation_RegisterController", action = "Index", orgid = UrlParameter.Optional, regid = UrlParameter.Optional }
+            );
         }
     }
 }

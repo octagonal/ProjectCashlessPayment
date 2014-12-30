@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace nmct.ba.cashlessproject.web.Models.VM
 {
@@ -24,18 +25,43 @@ namespace nmct.ba.cashlessproject.web.Models.VM
         }
 
         private List<Register> _registerList;
-        public List<Register> RegisterList
+        private List<Register> RegisterList
         {
             get { return _registerList; }
             set { _registerList = value; }
         }
+        public IEnumerable<SelectListItem> RegisterSelect
+        {
+            get { return new SelectList(RegisterList, "ID", "RegisterName"); }
+        }
 
         private List<Organisation> _organisationList;
-        public List<Organisation> OrganisationList
+        private List<Organisation> OrganisationList
         {
             get { return _organisationList; }
             set { _organisationList = value; }
         }
+        public IEnumerable<SelectListItem> OrganisationSelect
+        {
+            get { return new SelectList(OrganisationList, "ID", "OrganisationName"); }
+        }
+
+        private int _newRegID;
+
+        public int NewRegID
+        {
+            get { return _newRegID; }
+            set { _newRegID = value; }
+        }
+
+        private int _newOrgID;
+
+        public int NewOrgID
+        {
+            get { return _newOrgID; }
+            set { _newOrgID = value; }
+        }
+        
         
         
     }
