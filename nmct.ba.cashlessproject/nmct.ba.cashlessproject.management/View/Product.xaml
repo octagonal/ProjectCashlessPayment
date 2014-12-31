@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="nmct.ba.cashlessproject.management.View.Product"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:nmct.ba.cashlessproject.management.ViewModel"
+             xmlns:c="clr-namespace:nmct.ba.cashlessproject.management.View.converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="500">
+    <UserControl.DataContext>
+        <vm:ProductVM/>
+    </UserControl.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="Products" FontSize="24"/>
+        <ListBox Grid.Row="1" ItemsSource="{Binding Products}" DisplayMemberPath="ProductName" SelectedItem="{Binding SelectedProduct}"/>
+        <StackPanel Grid.Column="1" Grid.RowSpan="2" Margin="64">
+            <StackPanel Orientation="Horizontal">
+                <Button Content="New" Command="{Binding NewProductCommand}"/>
+                <Button Content="Save" Command="{Binding SaveProductCommand}" Margin="8,0,0,0"/>
+                <Button Content="Delete" Command="{Binding DeleteProductCommand}" Margin="8,0,0,0"/>
+            </StackPanel>
+            <StackPanel Margin="0,8,0,0">
+                <Label Content="Name:"/>
+                <TextBox Text="{Binding SelectedProduct.ProductName}" Margin="0,8,0,0"/>
+                <Label Content="Price:"/>
+                <TextBox Text="{Binding SelectedProduct.Price}" Margin="0,8,0,0"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

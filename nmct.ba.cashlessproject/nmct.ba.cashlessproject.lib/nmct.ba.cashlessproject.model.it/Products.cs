@@ -24,9 +24,9 @@ namespace nmct.ba.cashlessproject.model.it
             set { _productName = value; }
         }
 
-        private int _price;
+        private double _price;
 
-        public int Price
+        public double Price
         {
             get { return _price; }
             set { _price = value; }

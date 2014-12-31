@@ -53,7 +53,7 @@ namespace nmct.ba.cashlessproject.management.ViewModel
 
             if (!ApplicationVM.token.IsError)
             {
-                appvm.ChangePage(new CustomerVM());
+                appvm.ChangePage(new ProductVM());
             }
             else
             {

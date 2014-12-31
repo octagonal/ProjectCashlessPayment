@@ -14,6 +14,9 @@
         <DataTemplate DataType="{x:Type vm:CustomerVM}">
             <v:Customer/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:ProductVM}">
+            <v:Product/>
+        </DataTemplate>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
