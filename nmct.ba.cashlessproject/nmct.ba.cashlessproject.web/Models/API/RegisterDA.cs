@@ -56,7 +56,7 @@ namespace nmct.ba.cashlessproject.web.Models.API
 
         public static int InsertRegister(Register c, IEnumerable<Claim> claims)
         {
-            string sql = "INSERT INTO Register VALUES(@RegisterName,@Price)";
+            string sql = "INSERT INTO Register VALUES(@RegisterName,@Device)";
             DbParameter par1 = Database.AddParameter("AdminDB", "@RegisterName", c.RegisterName);
             DbParameter par2 = Database.AddParameter("AdminDB", "@Device", c.Device);
             return Database.InsertData(Database.GetConnection(CreateConnectionString(claims)), sql, par1, par2);
@@ -64,7 +64,7 @@ namespace nmct.ba.cashlessproject.web.Models.API
 
         public static void UpdateRegister(Register c, IEnumerable<Claim> claims)
         {
-            string sql = "UPDATE Register SET RegisterName=@RegisterName, Price=@Price WHERE ID=@ID";
+            string sql = "UPDATE Register SET RegisterName=@RegisterName, Device=@Device WHERE ID=@ID";
             DbParameter par1 = Database.AddParameter("AdminDB", "@RegisterName", c.RegisterName);
             DbParameter par2 = Database.AddParameter("AdminDB", "@Device", c.Device); ;
             DbParameter par3 = Database.AddParameter("AdminDB", "@ID", c.ID);
