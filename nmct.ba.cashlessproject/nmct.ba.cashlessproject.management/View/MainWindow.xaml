@@ -20,6 +20,9 @@
         <DataTemplate DataType="{x:Type vm:EmployeeVM}">
             <v:Employee/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:RegisterVM}">
+            <v:Register/>
+        </DataTemplate>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
