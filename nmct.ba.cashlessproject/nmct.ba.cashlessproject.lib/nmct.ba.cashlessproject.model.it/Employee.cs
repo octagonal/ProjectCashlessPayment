@@ -10,7 +10,7 @@ namespace nmct.ba.cashlessproject.model.it
     {
         private int _id;
 
-        public int Id
+        public int ID
         {
             get { return _id; }
             set { _id = value; }
@@ -40,12 +40,20 @@ namespace nmct.ba.cashlessproject.model.it
             set { _email = value; }
         }
 
-        private int _phone;
+        private string _phone;
 
-        public int Phone
+        public string Phone
         {
             get { return _phone; }
             set { _phone = value; }
+        }
+
+        private string _nationalNumber;
+
+        public string NationalNumber
+        {
+            get { return  _nationalNumber; }
+            set {  _nationalNumber = value; }
         }
         
     }

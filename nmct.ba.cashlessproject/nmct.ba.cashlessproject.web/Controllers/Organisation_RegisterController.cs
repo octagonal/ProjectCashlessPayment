@@ -59,7 +59,7 @@ namespace nmct.ba.cashlessproject.web.Controllers
         {
             try
             {
-                Organisation_RegisterDA.UpdateOrganisation_Register(item.ORInstance, item.NewOrgID, item.NewRegID);
+                Organisation_RegisterDA.UpdateOrganisation_Register(item.ORInstance, item.NewRegID, item.NewOrgID);
                 return RedirectToAction("Index");
             }
             catch
