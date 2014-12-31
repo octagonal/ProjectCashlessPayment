@@ -3,6 +3,7 @@ using nmct.ba.cashlessproject.model.it;
 using nmct.ba.cashlessproject.web.Helper;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Common;
 using System.IO;
 using System.Linq;
@@ -77,6 +78,37 @@ namespace nmct.ba.cashlessproject.web.Models
             return item;
         }
 
+        #region OrgDb Helpers
+
+        private static ConnectionStringSettings createConString(Organisation org)
+        {
+            // hic sunt dracones
+            return nmct.ba.cashlessproject.web.Models.API.RegisterDA.CreateConnectionStringBase(org.DbName, org.DbLogin, org.DbPassword);
+        }
+        private static int AssignToOrgDb(Organisation_Register c)
+        {
+            Organisation org = OrganisationDA.ReadOrganisation(c.OrganisationID);
+            Register reg = RegisterDA.ReadRegister(c.RegisterID);
+
+            string sql = "INSERT INTO Register VALUES(@RegisterName,@Device)";
+            DbParameter par1 = Database.AddParameter("AdminDB", "@RegisterName", reg.RegisterName);
+            DbParameter par2 = Database.AddParameter("AdminDB", "@Device", reg.Device);
+
+            return Database.InsertData(Database.GetConnection(createConString(org)), sql, par1, par2);
+        }
+
+        private static int DeleteFromOrgDb(Organisation_Register c)
+        {
+            Organisation org = OrganisationDA.ReadOrganisation(c.OrganisationID);
+            Register reg = RegisterDA.ReadRegister(c.RegisterID);
+
+            string sql = "DELETE FROM Register WHERE ID=@ID";
+            DbParameter par1 = Database.AddParameter("AdminDB", "@ID", reg.ID);
+
+            return Database.InsertData(Database.GetConnection(createConString(org)), sql, par1);
+        }
+        #endregion
+
         private static int EditOrganisation_Register(Organisation_Register o, int newRegID, int newOrgID)
         {
             string sql = "UPDATE Organisation_Register SET RegisterID=@NewRegisterID, OrganisationID=@NewOrganisationID, FromDate=@FromDate, UntilDate=@UntilDate WHERE RegisterID=@RegisterID AND OrganisationID=@OrganisationID";
@@ -87,6 +119,15 @@ namespace nmct.ba.cashlessproject.web.Models
             DbParameter par5 = Database.AddParameter("AdminDB", "@RegisterID", o.RegisterID);
             DbParameter par6 = Database.AddParameter("AdminDB", "@OrganisationID", o.OrganisationID);
             int idDb = Database.InsertData(Database.GetConnection("AdminDB"), sql, par1, par2, par3, par4, par5, par6);
+            
+            if (newOrgID != o.OrganisationID)
+            {
+                DeleteFromOrgDb(o);
+
+                o.RegisterID = newRegID;
+                o.OrganisationID = newOrgID;
+                AssignToOrgDb(o);
+            }
             return idDb;
         }
         private static int InsertOrganisation_Register(Organisation_Register o)
@@ -97,6 +138,7 @@ namespace nmct.ba.cashlessproject.web.Models
             DbParameter par3 = Database.AddParameter("AdminDB", "@FromDate", o.FromDate);
             DbParameter par4 = Database.AddParameter("AdminDB", "@UntilDate", o.UntilDate);
             int id = Database.InsertData(Database.GetConnection("AdminDB"), sql, par1, par2, par3, par4);
+            AssignToOrgDb(o);
             return id;
         }
 
@@ -108,6 +150,7 @@ namespace nmct.ba.cashlessproject.web.Models
             DbParameter par3 = Database.AddParameter("AdminDB", "@FromDate", o.FromDate);
             DbParameter par4 = Database.AddParameter("AdminDB", "@UntilDate", o.UntilDate);
             int id = Database.InsertData(Database.GetConnection("AdminDB"), sql, par1, par2, par3, par4);
+            DeleteFromOrgDb(o);
             return id;
         }
         #endregion
