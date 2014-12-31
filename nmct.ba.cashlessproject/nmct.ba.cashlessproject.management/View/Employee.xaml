@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="nmct.ba.cashlessproject.management.View.Employee"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:nmct.ba.cashlessproject.management.ViewModel"
+             xmlns:c="clr-namespace:nmct.ba.cashlessproject.management.View.converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="500">
+    <UserControl.DataContext>
+        <vm:EmployeeVM/>
+    </UserControl.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="Employees" FontSize="24"/>
+        <ListBox Grid.Row="1" ItemsSource="{Binding Employees}" DisplayMemberPath="EmployeeName" SelectedItem="{Binding SelectedEmployee}"/>
+        <StackPanel Grid.Column="1" Grid.RowSpan="2" Margin="64">
+            <StackPanel Orientation="Horizontal">
+                <Button Content="New" Command="{Binding NewEmployeeCommand}"/>
+                <Button Content="Save" Command="{Binding SaveEmployeeCommand}" Margin="8,0,0,0"/>
+                <Button Content="Delete" Command="{Binding DeleteEmployeeCommand}" Margin="8,0,0,0"/>
+            </StackPanel>
+            <StackPanel Margin="0,8,0,0">
+                <Label Content="ID:"/>
+                <TextBox Text="{Binding SelectedEmployee.ID}" Margin="0,8,0,0"/>
+                <Label Content="EmployeeName:"/>
+                <TextBox Text="{Binding SelectedEmployee.EmployeeName}" Margin="0,8,0,0"/>
+                <Label Content="Address:"/>
+                <TextBox Text="{Binding SelectedEmployee.Address}" Margin="0,8,0,0"/>
+                <Label Content="Email:"/>
+                <TextBox Text="{Binding SelectedEmployee.Email}" Margin="0,8,0,0"/>
+                <Label Content="Phone:"/>
+                <TextBox Text="{Binding SelectedEmployee.Phone}" Margin="0,8,0,0"/>
+                <Label Content="NationalNumber:"/>
+                <TextBox Text="{Binding SelectedEmployee.NationalNumber}" Margin="0,8,0,0"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

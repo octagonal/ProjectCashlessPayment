@@ -14,9 +14,9 @@ namespace nmct.ba.cashlessproject.web.Models
     public class Organisation_RegisterDA
     {
         #region Public CRUD functies
-        public static int               UpdateOrganisation_Register(Organisation_Register item, int oldReg, int oldOrg)
+        public static int               UpdateOrganisation_Register(Organisation_Register item, int newReg, int newOrg)
         {
-            return EditOrganisation_Register(item, oldReg, oldOrg);
+            return EditOrganisation_Register(item, newReg, newOrg);
         }
         public static int               DeleteOrganisation_Register(int regId, int orgId)
         {
@@ -86,9 +86,8 @@ namespace nmct.ba.cashlessproject.web.Models
             DbParameter par4 = Database.AddParameter("AdminDB", "@UntilDate", o.UntilDate);
             DbParameter par5 = Database.AddParameter("AdminDB", "@RegisterID", o.RegisterID);
             DbParameter par6 = Database.AddParameter("AdminDB", "@OrganisationID", o.OrganisationID);
-            int idDb = Database.InsertData(Database.GetConnection("AdminDB"), sql, par1, par2, par3, par4);
+            int idDb = Database.InsertData(Database.GetConnection("AdminDB"), sql, par1, par2, par3, par4, par5, par6);
             return idDb;
-
         }
         private static int InsertOrganisation_Register(Organisation_Register o)
         {
