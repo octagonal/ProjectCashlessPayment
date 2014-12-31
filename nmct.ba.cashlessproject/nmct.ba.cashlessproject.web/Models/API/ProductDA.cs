@@ -10,7 +10,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Web;
 
-namespace nmct.ba.cashlessproject.web.Models
+namespace nmct.ba.cashlessproject.web.Models.API
 {
     public class ProductDA
     {

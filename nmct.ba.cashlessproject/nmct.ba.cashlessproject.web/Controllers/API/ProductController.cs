@@ -1,5 +1,6 @@
 ﻿using nmct.ba.cashlessproject.model.it;
 using nmct.ba.cashlessproject.web.Models;
+using nmct.ba.cashlessproject.web.Models.API;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,31 +9,31 @@ using System.Net.Http;
 using System.Security.Claims;
 using System.Web.Http;
 
-namespace nmct.ba.cashlessproject.web.Controllers
+namespace nmct.ba.cashlessproject.web.Controllers.API
 {
     [Authorize]
-    public class EmployeeController : ApiController
+    public class ProductController : ApiController
     {
-        public List<Employee> Get()
+        public List<Product> Get()
         {
             ClaimsPrincipal p = RequestContext.Principal as ClaimsPrincipal;
-            return EmployeeDA.GetEmployees(p.Claims);
+            return ProductDA.GetProducts(p.Claims);
         }
 
-        public HttpResponseMessage Post(Employee c)
+        public HttpResponseMessage Post(Product c)
         {
             ClaimsPrincipal p = RequestContext.Principal as ClaimsPrincipal;
-            int id = EmployeeDA.InsertEmployee(c, p.Claims);
+            int id = ProductDA.InsertProduct(c, p.Claims);
 
             HttpResponseMessage message = new HttpResponseMessage(HttpStatusCode.OK);
             message.Content = new StringContent(id.ToString());
             return message;
         }
 
-        public HttpResponseMessage Put(Employee c)
+        public HttpResponseMessage Put(Product c)
         {
             ClaimsPrincipal p = RequestContext.Principal as ClaimsPrincipal;
-            EmployeeDA.UpdateEmployee(c, p.Claims);
+            ProductDA.UpdateProduct(c, p.Claims);
 
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
@@ -40,7 +41,7 @@ namespace nmct.ba.cashlessproject.web.Controllers
         public HttpResponseMessage Delete(int id)
         {
             ClaimsPrincipal p = RequestContext.Principal as ClaimsPrincipal;
-            EmployeeDA.DeleteEmployee(id, p.Claims);
+            ProductDA.DeleteProduct(id, p.Claims);
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
     }
