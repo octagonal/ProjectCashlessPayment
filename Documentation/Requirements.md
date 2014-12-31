@@ -72,7 +72,7 @@
 - [x] Kan een medewerker uit de lijst verwijderen (B34)
 
 ### Beheer kassa (B4)
-- [ ] Kan een overzicht van al zijn kassa’s weergeven (B41)
+- [x] Kan een overzicht van al zijn kassa’s weergeven (B41)
 - [ ] Kan opvragen welke medewerker een kassa bemand heeft (B42)
 
 ### Beheer klanten (B5)
