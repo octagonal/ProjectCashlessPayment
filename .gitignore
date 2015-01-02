@@ -7,7 +7,7 @@ Documentation/
 *.suo
 *.user
 *.sln.docstates
-*.csproj
+*.lib.csproj
 
 # Build results
 
