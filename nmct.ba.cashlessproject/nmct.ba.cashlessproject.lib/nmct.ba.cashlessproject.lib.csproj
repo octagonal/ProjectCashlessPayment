@@ -40,11 +40,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cryptography.cs" />
+    <Compile Include="nmct.ba.cashlessproject.model.it\Customers.cs" />
     <Compile Include="nmct.ba.cashlessproject.model.it\Organisation_Register.cs" />
     <Compile Include="nmct.ba.cashlessproject.model.it\Errorlog.cs" />
     <Compile Include="nmct.ba.cashlessproject.model.it\Organisations.cs" />
     <Compile Include="nmct.ba.cashlessproject.model.it\Registers.cs" />
-    <Compile Include="nmct.ba.cashlessproject.model.it\Customers.cs" />
+    <Compile Include="nmct.ba.cashlessproject.model.it\Register_Employee.cs" />
     <Compile Include="nmct.ba.cashlessproject.model.it\Employee.cs" />
     <Compile Include="nmct.ba.cashlessproject.model.it\Products.cs" />
     <Compile Include="nmct.ba.cashlessproject.model.it\Sales.cs" />
