@@ -17,7 +17,8 @@ namespace nmct.ba.cashlessproject.klant.ViewModel
 
         public ApplicationVM()
         {
-            CurrentPage = new CashIOVM();
+            //CurrentPage = new CashIOVM();
+            CurrentPage = new LoginVM();
         }
 
         private object currentPage;

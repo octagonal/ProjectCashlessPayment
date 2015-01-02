@@ -12,6 +12,9 @@
         <DataTemplate DataType="{x:Type vm:CashIOVM}">
             <v:CashIO/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:LoginVM}">
+            <v:Login/>
+        </DataTemplate>
     </Window.Resources>
     <Grid>
         <ContentControl Grid.Row="0" Grid.Column="0" Content="{Binding CurrentPage}"/>
