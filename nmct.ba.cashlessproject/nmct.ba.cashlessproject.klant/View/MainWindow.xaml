@@ -1,8 +1,19 @@
 ﻿<Window x:Class="nmct.ba.cashlessproject.klant.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Klant" Height="350" Width="525">
+        Title="Klant" Height="350" Width="525"
+        xmlns:v="clr-namespace:nmct.ba.cashlessproject.klant.View"
+        xmlns:vm="clr-namespace:nmct.ba.cashlessproject.klant.ViewModel"
+>
+    <Window.DataContext>
+        <vm:ApplicationVM/>
+    </Window.DataContext>
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type vm:CashIOVM}">
+            <v:CashIO/>
+        </DataTemplate>
+    </Window.Resources>
     <Grid>
-        
+        <ContentControl Grid.Row="0" Grid.Column="0" Content="{Binding CurrentPage}"/>
     </Grid>
 </Window>

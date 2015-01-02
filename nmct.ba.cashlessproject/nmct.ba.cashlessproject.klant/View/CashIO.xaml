@@ -1,0 +1,85 @@
+﻿<UserControl x:Class="nmct.ba.cashlessproject.klant.View.CashIO"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="clr-namespace:nmct.ba.cashlessproject.klant.ViewModel"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.DataContext>
+        <vm:CashIOVM/>
+    </UserControl.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="9*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="9*"/>
+                <ColumnDefinition Width="4*"/>
+            </Grid.ColumnDefinitions>
+            <TextBox>
+                <TextBox.Text>
+                    <MultiBinding StringFormat="Hallo {0}! Je huidige saldo bedraagt €{1}.">
+                        <Binding Path="customer.CustomerName" />
+                        <Binding Path="customer.Balance" />
+                    </MultiBinding>
+                </TextBox.Text>
+            </TextBox>
+            <Label ContentStringFormat="Hallo {0}! Je huidige saldo bedraag{1}" Content="{Binding customer.Name}"></Label>
+            <Label Grid.Column="1" ContentStringFormat="(Het maximum bedrag is {0})" Content="{Binding MaxCash}"></Label>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Button Content="Saldo Afdrukken" Command="{Binding PrintBalanceCommand}"></Button>
+            <Button Grid.Column="1" Content="Kaart teruggeven" Command="{Binding LogOutCommand}"></Button>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Button>
+                <Label ContentStringFormat="Huidig bedrag opladen (€{0})" Content="{Binding CurrentAmountUpload}" />
+            </Button>
+        </Grid>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="9*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Button 
+                x:Name="Add5" 
+                Grid.Row="0" 
+                Content="5" 
+                Command="{Binding AddCashCommand}" 
+                CommandParameter="5"
+            >
+            </Button>
+            <Button Grid.Row="1" Content="10" Command="{Binding AddCashCommand}" CommandParameter="10">
+
+            </Button>
+            <Button Grid.Row="2" Content="20" Command="{Binding AddCashCommand}" CommandParameter="20">
+
+            </Button>
+            <Button Grid.Row="3" Content="50" Command="{Binding AddCashCommand}" CommandParameter="50" >
+
+            </Button>
+            <Label Grid.Row="0" Grid.RowSpan="4" Grid.Column="3" ContentStringFormat="Totaal op te laden: €{0}" Content="{Binding CurrentAmountUpload}">
+                
+            </Label>
+        </Grid>
+    </Grid>
+</UserControl>
