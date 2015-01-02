@@ -76,7 +76,7 @@ namespace nmct.ba.cashlessproject.web.Helper
             catch (Exception ex)
             {
 #if DEBUG
-                Debug.WriteLine(ex.Message);
+                Console.WriteLine(ex.Message);
 #endif
                 if (reader != null)
                     reader.Close();
@@ -100,7 +100,7 @@ namespace nmct.ba.cashlessproject.web.Helper
             catch (Exception ex)
             {
 #if DEBUG
-                Debug.WriteLine(ex.Message);
+                Console.WriteLine(ex.Message);
 #endif
                 if (command != null)
                     ReleaseConnection(command.Connection);
@@ -127,7 +127,7 @@ namespace nmct.ba.cashlessproject.web.Helper
             catch (Exception ex)
             {
 #if DEBUG
-                Debug.WriteLine(ex.Message);
+                Console.WriteLine(ex.Message);
 #endif
                 if (command != null)
                     ReleaseConnection(command.Connection);
@@ -156,7 +156,7 @@ namespace nmct.ba.cashlessproject.web.Helper
             catch (Exception ex)
             {
 #if DEBUG
-                Debug.WriteLine(ex.Message);
+                Console.WriteLine(ex.Message);
 #endif
                 ReleaseConnection(con);
                 throw;
@@ -174,7 +174,7 @@ namespace nmct.ba.cashlessproject.web.Helper
             catch (Exception ex)
             {
 #if DEBUG
-                Debug.WriteLine(ex.Message);
+                Console.WriteLine(ex.Message);
 #endif
                 ReleaseConnection(con);
                 throw;
@@ -210,7 +210,7 @@ namespace nmct.ba.cashlessproject.web.Helper
             catch (Exception ex)
             {
 #if DEBUG
-                Debug.WriteLine(ex.Message);
+                Console.WriteLine(ex.Message);
 #endif
                 throw;
             }
@@ -228,7 +228,7 @@ namespace nmct.ba.cashlessproject.web.Helper
             catch (Exception ex)
             {
 #if DEBUG
-                Debug.WriteLine(ex.Message);
+                Console.WriteLine(ex.Message);
 #endif
                 throw;
             }
@@ -252,7 +252,7 @@ namespace nmct.ba.cashlessproject.web.Helper
             catch (Exception ex)
             {
 #if DEBUG
-                Debug.WriteLine(ex.Message);
+                Console.WriteLine(ex.Message);
 #endif
                 throw;
             }
