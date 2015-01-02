@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants.cs" />
     <Compile Include="Cryptography.cs" />
     <Compile Include="nmct.ba.cashlessproject.model.it\Customers.cs" />
     <Compile Include="nmct.ba.cashlessproject.model.it\Organisation_Register.cs" />
