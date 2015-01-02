@@ -41,7 +41,7 @@ namespace nmct.ba.cashlessproject.management.ViewModel
             using (HttpClient client = new HttpClient())
             {
                 client.SetBearerToken(ApplicationVM.token.AccessToken);
-                HttpResponseMessage response = await client.GetAsync("http://localhost:43622/api/Product");
+                HttpResponseMessage response = await client.GetAsync(lib.Constants.WEBURL + "api/Product");
                 if (response.IsSuccessStatusCode)
                 {
                     string json = await response.Content.ReadAsStringAsync();
@@ -94,7 +94,7 @@ namespace nmct.ba.cashlessproject.management.ViewModel
                 using (HttpClient client = new HttpClient())
                 {
                     client.SetBearerToken(ApplicationVM.token.AccessToken);
-                    HttpResponseMessage response = await client.PostAsync("http://localhost:43622/api/Product", new StringContent(input, Encoding.UTF8, "application/json"));
+                    HttpResponseMessage response = await client.PostAsync(lib.Constants.WEBURL + "api/Product", new StringContent(input, Encoding.UTF8, "application/json"));
                     if (response.IsSuccessStatusCode)
                     {
                         string output = await response.Content.ReadAsStringAsync();
@@ -111,7 +111,7 @@ namespace nmct.ba.cashlessproject.management.ViewModel
                 using (HttpClient client = new HttpClient())
                 {
                     client.SetBearerToken(ApplicationVM.token.AccessToken);
-                    HttpResponseMessage response = await client.PutAsync("http://localhost:43622/api/Product", new StringContent(input, Encoding.UTF8, "application/json"));
+                    HttpResponseMessage response = await client.PutAsync(lib.Constants.WEBURL + "api/Product", new StringContent(input, Encoding.UTF8, "application/json"));
                     if (!response.IsSuccessStatusCode)
                     {
                         Console.WriteLine("error");
@@ -125,7 +125,7 @@ namespace nmct.ba.cashlessproject.management.ViewModel
             using (HttpClient client = new HttpClient())
             {
                 client.SetBearerToken(ApplicationVM.token.AccessToken);
-                HttpResponseMessage response = await client.DeleteAsync("http://localhost:43622/api/Product/" + SelectedProduct.ID);
+                HttpResponseMessage response = await client.DeleteAsync(lib.Constants.WEBURL + "api/Product/" + SelectedProduct.ID);
                 if (!response.IsSuccessStatusCode)
                 {
                     Console.WriteLine("error");
