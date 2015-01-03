@@ -62,7 +62,7 @@
                 <RowDefinition Height="9*"></RowDefinition>
                 <RowDefinition Height="60"></RowDefinition>
             </Grid.RowDefinitions>
-            <Button Grid.Row="0" Grid.ColumnSpan="2" Content="Bestelling doorvoeren" Command="{Binding PayBillCommand}"></Button>
+            <Button Grid.Row="0" Grid.ColumnSpan="2" Content="Bestelling uitvoeren" Command="{Binding PayBillCommand}"></Button>
             <ListBox Grid.Row="1" Grid.ColumnSpan="2" SelectionMode="Single" ItemsSource="{Binding ProductsToBuy}" ItemTemplate="{StaticResource Product}" SelectedItem="{Binding SelectedProductToBuy, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"></ListBox>
             <Button Grid.Row="2" Content="-" FontSize="30px" Command="{Binding RemoveProductFromBillCommand}"></Button>
             <Label Grid.Row="2" Grid.Column="1" Content="{Binding AmountToPay}" ContentStringFormat="Totaal: €{0}"></Label>

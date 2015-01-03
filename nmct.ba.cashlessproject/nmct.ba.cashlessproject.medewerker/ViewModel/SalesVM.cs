@@ -405,12 +405,6 @@ namespace nmct.ba.cashlessproject.medewerker.ViewModel
                 {
                     string json = await response.Content.ReadAsStringAsync();
                     Employee = JsonConvert.DeserializeObject<Employee>(json);
-
-                    /*if (Customer.ID == 0)
-                    {
-                        Customer = BuildCustomer();
-                        RegisterCustomer(Customer);
-                    }*/
                 }
                 else
                 {
@@ -418,8 +412,6 @@ namespace nmct.ba.cashlessproject.medewerker.ViewModel
                     Console.WriteLine("No employee");
                 }
             }
-            //AmountToPay = 0;
-            //PayBillCommand.RaiseCanExecuteChanged();
         }
 
     }
