@@ -20,6 +20,12 @@ namespace nmct.ba.cashlessproject.web.Controllers.API
             return EmployeeDA.GetEmployees(p.Claims);
         }
 
+        public Employee Get(string id)
+        {
+            ClaimsPrincipal p = RequestContext.Principal as ClaimsPrincipal;
+            return EmployeeDA.GetEmployee(id, p.Claims);
+        }
+
         public HttpResponseMessage Post(Employee c)
         {
             ClaimsPrincipal p = RequestContext.Principal as ClaimsPrincipal;

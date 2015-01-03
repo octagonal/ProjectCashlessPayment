@@ -38,6 +38,31 @@ namespace nmct.ba.cashlessproject.web.Models.API
             return list;
         }
 
+        public static Employee GetEmployee(string natNum, IEnumerable<Claim> claims)
+        {
+            Employee c = new Employee();
+            string sql = "SELECT * FROM Employee WHERE NationalNumber=@NationalNumber";
+            DbParameter par1 = Database.AddParameter("AdminDB", "@NationalNumber", natNum);
+            DbDataReader reader = Database.GetData(Database.GetConnection(CreateConnectionString(claims)), sql, par1);
+            while (reader.Read())
+            {
+                c = BuildModel(reader);
+                /*
+                c.ID = Convert.ToInt32(reader["ID"]);
+                c.CustomerName = reader["CustomerName"].ToString();
+                c.Address = reader["Address"].ToString();
+                if (!DBNull.Value.Equals(reader["Picture"]))
+                    c.Picture = (byte[])reader["Picture"];
+                else
+                    c.Picture = new byte[0];
+                c.Balance = Double.Parse(reader["Balance"].ToString());
+                c.NationalNumber = reader["NationalNumber"].ToString();
+                */
+            }
+
+            return c;
+        }
+
         private static Employee BuildModel(DbDataReader reader)
         {
             return new Employee()
