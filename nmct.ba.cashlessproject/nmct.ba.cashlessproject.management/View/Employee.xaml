@@ -26,6 +26,7 @@
                 <Button Content="New" Command="{Binding NewEmployeeCommand}"/>
                 <Button Content="Save" Command="{Binding SaveEmployeeCommand}" Margin="8,0,0,0"/>
                 <Button Content="Delete" Command="{Binding DeleteEmployeeCommand}" Margin="8,0,0,0"/>
+                <Button Content="BeID Data" Command="{Binding InjectEmployeeCommand}" Margin="8,0,0,0"/>
             </StackPanel>
             <StackPanel Margin="0,8,0,0">
                 <Label Content="ID:"/>

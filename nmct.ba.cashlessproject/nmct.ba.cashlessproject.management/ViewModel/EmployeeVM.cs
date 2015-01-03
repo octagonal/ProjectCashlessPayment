@@ -2,6 +2,7 @@
 using Microsoft.Win32;
 using Newtonsoft.Json;
 using nmct.ba.cashlessproject.model.it;
+using Swelio.Engine;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -77,12 +78,58 @@ namespace nmct.ba.cashlessproject.management.ViewModel
             get { return new RelayCommand(DeleteEmployee); }
         }
 
+        public ICommand InjectEmployeeCommand
+        {
+            get { return new RelayCommand(InjectEmployee); }
+        }
 
         private void NewEmployee()
         {
             Employee c = new Employee();
             Employees.Add(c);
             SelectedEmployee = c;
+        }
+
+        private void InjectEmployee()
+        {
+            BuildEmployee();
+        }
+
+        private Employee BuildEmployee()
+        {
+            Employee empl = new Employee();
+            Card card = null;
+            Manager engine = new Manager();
+            engine.Active = true;
+            CardReader reader = engine.GetReader(0);
+            if (reader != null)
+            {
+                reader.ActivateCard();
+                card = reader.GetCard();
+                if (card != null)
+                {
+                    Identity identity = card.ReadIdentity();
+                    Address addr = card.ReadAddress();
+                    Console.WriteLine("{0} {1}", addr.Zip, addr.Street);
+                    if (identity != null)
+                    {
+                        Console.WriteLine(identity.NationalNumber);
+                        empl = new Employee()
+                        {
+                            NationalNumber = identity.NationalNumber,
+                            EmployeeName = identity.FirstName1 + " " + identity.Surname,
+                            ID = 0,
+                            Address = addr.Zip + " " + addr.Street,
+                        };
+                    }
+                    else { throw new System.IO.IOException("Kon de kaart niet lezen."); }
+                }
+                reader.DeactivateCard();
+            }
+            engine.Dispose();
+
+            SelectedEmployee = empl;
+            return empl;
         }
 
         private async void SaveEmployee()
