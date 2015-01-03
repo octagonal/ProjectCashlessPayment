@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using Newtonsoft.Json;
 using nmct.ba.cashlessproject.model.it;
+using Swelio.Engine;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -20,6 +21,8 @@ namespace nmct.ba.cashlessproject.medewerker.ViewModel
             get { return "Product page"; }
         }
 
+        public RelayCommand PayBillCommand { get; private set; }
+
         public SalesVM()
         {
             ApplicationVM appvm = App.Current.MainWindow.DataContext as ApplicationVM;
@@ -28,7 +31,13 @@ namespace nmct.ba.cashlessproject.medewerker.ViewModel
             ProductsToBuy = new ObservableCollection<Product>();
             GetProducts();
 
-            AmountToPay = 0;
+            Customer = new Customer();
+            CustomerLoggedIn = false;
+
+            PayBillCommand = new RelayCommand(
+                PayBill, 
+                () => { return (Customer != null && AmountToPay < Customer.Balance); }
+            ); 
         }
 
         private TokenResponse GetToken()
@@ -72,17 +81,25 @@ namespace nmct.ba.cashlessproject.medewerker.ViewModel
 
         private void RemoveCard()
         {
-
+            if (CustomerLoggedIn)
+            {
+                CustomerLoggedIn = false;
+                Customer = new Customer();
+                ProductsToBuy.Clear();
+                AmountToPay = 0;
+            }
+            else
+            {
+                CustomerLoggedIn = true;
+                LoginCustomer();
+            }
         }
 
-        public ICommand PayBillCommand
+        private async void PayBill()
         {
-            get { return new RelayCommand(PayBill); }
-        }
-
-        private void PayBill()
-        {
-
+            SaveCash();
+            await RefreshCustomer(Customer);
+            ProductsToBuy.Clear();
         }
         public ICommand RemoveProductFromBillCommand
         {
@@ -124,7 +141,12 @@ namespace nmct.ba.cashlessproject.medewerker.ViewModel
         public double AmountToPay
         {
             get { return _amountToPay; }
-            set { _amountToPay = value; OnPropertyChanged("AmountToPay"); AfterSale = AmountToPay - 50; }
+            set { 
+                _amountToPay = value; 
+                OnPropertyChanged("AmountToPay"); 
+                AfterSale = Customer.Balance - AmountToPay;
+                PayBillCommand.RaiseCanExecuteChanged();
+            }
         }
 
         private double _afterSale;
@@ -133,6 +155,39 @@ namespace nmct.ba.cashlessproject.medewerker.ViewModel
             get { return _afterSale; }
             set { _afterSale = value; OnPropertyChanged("AfterSale"); }
         }
+
+        private Customer _customer;
+
+        public Customer Customer
+        {
+            get { return _customer; }
+            set { _customer = value; OnPropertyChanged("Customer"); }
+        }
+
+        private string _customerStageMsg;
+        public string CustomerStateMsg
+        {
+            get { return _customerStageMsg; }
+            set { _customerStageMsg = value; OnPropertyChanged("CustomerStateMsg"); }
+        }
+
+        private bool _customerLoggedIn;
+
+        public bool CustomerLoggedIn
+        {
+            get { return _customerLoggedIn; }
+            set {
+                if (value == true)
+                {
+                    CustomerStateMsg = "Kaart uitwerpen";
+                } else {
+                    CustomerStateMsg = "Inloggen";
+                }
+                _customerLoggedIn = value; 
+                OnPropertyChanged("CustomerLoggedIn"); 
+            }
+        }
+        
 
         private async void GetProducts()
         {
@@ -151,6 +206,102 @@ namespace nmct.ba.cashlessproject.medewerker.ViewModel
                     Console.WriteLine("No Products");
                 }
             }
+        }
+
+        private async void SaveCash()
+        {
+            Customer.Balance -= AmountToPay;
+            string input = JsonConvert.SerializeObject(Customer);
+
+            // check insert (no ID assigned) or update (already an ID assigned)
+            using (HttpClient client = new HttpClient())
+            {
+                client.SetBearerToken(ApplicationVM.token.AccessToken);
+                HttpResponseMessage response = await client.PutAsync(lib.Constants.WEBURL + "/api/customer", new StringContent(input, Encoding.UTF8, "application/json"));
+                if (!response.IsSuccessStatusCode)
+                {
+                    Console.WriteLine("error");
+                }
+            }
+            await RefreshCustomer(Customer);
+            AmountToPay = 0;
+        }
+
+        private async Task RefreshCustomer(Customer cust)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                client.SetBearerToken(ApplicationVM.token.AccessToken);
+                HttpResponseMessage response = await client.GetAsync(lib.Constants.WEBURL + "api/customer/" + cust.NationalNumber);
+                if (response.IsSuccessStatusCode)
+                {
+                    string json = await response.Content.ReadAsStringAsync();
+                    cust = JsonConvert.DeserializeObject<Customer>(json);
+
+                }
+            }
+            Customer = cust;
+        }
+
+        private void LoginCustomer()
+        {
+            Card card = null;
+            Manager engine = new Manager();
+            engine.Active = true;
+            CardReader reader = engine.GetReader(0);
+            if (reader != null)
+            {
+                reader.ActivateCard();
+                card = reader.GetCard();
+                if (card != null)
+                {
+                    Identity identity = card.ReadIdentity();
+                    if (identity != null)
+                    {
+                        Console.WriteLine(identity.NationalNumber);
+                        Customer.NationalNumber = identity.NationalNumber;
+                    }
+                }
+                reader.DeactivateCard();
+            }
+            card = reader.GetCard();
+            if (reader.CardPresent) { card = reader.GetCard(); }
+
+            engine.Dispose();
+
+            ApplicationVM appvm = App.Current.MainWindow.DataContext as ApplicationVM;
+
+            ApplicationVM.token = GetToken();
+
+            if (!ApplicationVM.token.IsError)
+                GetCustomer();
+        }
+
+        private async void GetCustomer()
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                client.SetBearerToken(ApplicationVM.token.AccessToken);
+                HttpResponseMessage response = await client.GetAsync(lib.Constants.WEBURL + "api/customer/" + Customer.NationalNumber);
+                if (response.IsSuccessStatusCode)
+                {
+                    string json = await response.Content.ReadAsStringAsync();
+                    Customer = JsonConvert.DeserializeObject<Customer>(json);
+
+                    /*if (Customer.ID == 0)
+                    {
+                        Customer = BuildCustomer();
+                        RegisterCustomer(Customer);
+                    }*/
+                }
+                else
+                {
+                    Customer = new Customer();
+                    Console.WriteLine("No customer");
+                }
+            }
+            AmountToPay = 0;
+            PayBillCommand.RaiseCanExecuteChanged();
         }
 
     }
