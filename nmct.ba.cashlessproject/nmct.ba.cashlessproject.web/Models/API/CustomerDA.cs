@@ -48,14 +48,37 @@ namespace nmct.ba.cashlessproject.web.Models.API
             return list;
         }
 
+        public static Customer GetCustomer(string natNum, IEnumerable<Claim> claims)
+        {
+            Customer c = new Customer();
+            string sql = "SELECT * FROM Customer WHERE NationalNumber=@NationalNumber";
+            DbParameter par1 = Database.AddParameter("AdminDB", "@NationalNumber", natNum);
+            DbDataReader reader = Database.GetData(Database.GetConnection(CreateConnectionString(claims)), sql, par1);
+            while (reader.Read())
+            {
+                c.ID = Convert.ToInt32(reader["ID"]);
+                c.CustomerName = reader["CustomerName"].ToString();
+                c.Address = reader["Address"].ToString();
+                if (!DBNull.Value.Equals(reader["Picture"]))
+                    c.Picture = (byte[])reader["Picture"];
+                else
+                    c.Picture = new byte[0];
+                c.Balance = Double.Parse(reader["Balance"].ToString());
+                c.NationalNumber = reader["NationalNumber"].ToString();
+            }
+
+            return c;
+        }
+
         public static int InsertCustomer(Customer c, IEnumerable<Claim> claims)
         {
-            string sql = "INSERT INTO Customer VALUES(@CustomerName,@Address,@Picture,@Balance)";
+            string sql = "INSERT INTO Customer VALUES(@CustomerName,@Address,@Picture,@Balance,@NationalNumber)";
             DbParameter par1 = Database.AddParameter("AdminDB", "@CustomerName", c.CustomerName);
             DbParameter par2 = Database.AddParameter("AdminDB", "@Address", c.Address);
-            DbParameter par3 = Database.AddParameter("AdminDB", "@Picture", c.Picture);
+            DbParameter par3 = Database.AddParameter("AdminDB", "@Picture", new byte[0]);
             DbParameter par4 = Database.AddParameter("AdminDB", "@Balance", c.Balance);
-            return Database.InsertData(Database.GetConnection(CreateConnectionString(claims)), sql, par1, par2, par3, par4);
+            DbParameter par5 = Database.AddParameter("AdminDB", "@NationalNumber", c.NationalNumber);
+            return Database.InsertData(Database.GetConnection(CreateConnectionString(claims)), sql, par1, par2, par3, par4, par5);
         }
 
         public static void UpdateCustomer(Customer c, IEnumerable<Claim> claims)

@@ -27,12 +27,11 @@
             <TextBox>
                 <TextBox.Text>
                     <MultiBinding StringFormat="Hallo {0}! Je huidige saldo bedraagt €{1}.">
-                        <Binding Path="customer.CustomerName" />
-                        <Binding Path="customer.Balance" />
+                        <Binding Path="Customer.CustomerName" />
+                        <Binding Path="Customer.Balance" />
                     </MultiBinding>
                 </TextBox.Text>
             </TextBox>
-            <Label ContentStringFormat="Hallo {0}! Je huidige saldo bedraag{1}" Content="{Binding customer.Name}"></Label>
             <Label Grid.Column="1" ContentStringFormat="(Het maximum bedrag is {0})" Content="{Binding MaxCash}"></Label>
         </Grid>
         <Grid Grid.Row="1">
@@ -44,7 +43,7 @@
             <Button Grid.Column="1" Content="Kaart teruggeven" Command="{Binding LogOutCommand}"></Button>
         </Grid>
         <Grid Grid.Row="2">
-            <Button>
+            <Button Command="{Binding UploadCashCommand}">
                 <Label ContentStringFormat="Huidig bedrag opladen (€{0})" Content="{Binding CurrentAmountUpload}" />
             </Button>
         </Grid>

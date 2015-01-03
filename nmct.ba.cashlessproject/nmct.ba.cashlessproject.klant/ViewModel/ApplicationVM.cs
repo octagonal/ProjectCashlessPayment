@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using nmct.ba.cashlessproject.model.it;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,6 +15,12 @@ namespace nmct.ba.cashlessproject.klant.ViewModel
     class ApplicationVM : ObservableObject
     {
         public static TokenResponse token = null;
+
+        private Customer customer;
+        public Customer Customer { 
+            get { return customer; }
+            set { customer = value; OnPropertyChanged("Customer") ;} 
+        }
 
         public ApplicationVM()
         {
@@ -68,6 +75,7 @@ namespace nmct.ba.cashlessproject.klant.ViewModel
 
         public void LoggedIn()
         {
+            Pages.Add(new CashIOVM());
             LogoutCommand.RaiseCanExecuteChanged();
         }
 
@@ -75,7 +83,7 @@ namespace nmct.ba.cashlessproject.klant.ViewModel
         {
             ApplicationVM.token = null;
             Pages.Clear();
-            //ChangePage(new LoginVM());
+            ChangePage(new LoginVM());
             LogoutCommand.RaiseCanExecuteChanged();
         }
     }

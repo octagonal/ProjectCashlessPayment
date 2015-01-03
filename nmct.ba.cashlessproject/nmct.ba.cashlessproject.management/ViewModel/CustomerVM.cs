@@ -161,9 +161,6 @@ namespace nmct.ba.cashlessproject.management.ViewModel
 
             return data;
         }
-
-
-
     }
 
 }

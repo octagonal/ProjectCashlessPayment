@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Command;
+using nmct.ba.cashlessproject.management.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

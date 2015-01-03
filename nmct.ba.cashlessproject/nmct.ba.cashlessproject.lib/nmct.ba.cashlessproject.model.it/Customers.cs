@@ -47,5 +47,13 @@ namespace nmct.ba.cashlessproject.model.it
             set { _balance = value; }
         }
 
+        private string _nationalNumber;
+
+        public string NationalNumber
+        {
+            get { return _nationalNumber; }
+            set { _nationalNumber = value; }
+        }
+
     }
 }
