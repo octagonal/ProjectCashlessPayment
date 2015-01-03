@@ -26,13 +26,13 @@
 ## Desktop App: D+F
 
 ### Klant (D)
-- [ ] Kan zichzelf registreren om het systeem te gebruiken (D1)
-- [ ] Kan zijn kaart opladen voor een bedrag van maximum 100 euro (D2)
-- [ ] Kan het huidige saldo van zijn kaart controleren (D3)
+- [x] Kan zichzelf registreren om het systeem te gebruiken (D1)
+- [x] Kan zijn kaart opladen voor een bedrag van maximum 100 euro (D2)
+- [x] Kan het huidige saldo van zijn kaart controleren (D3)
 
 ### Kassasysteem: klant (F)
-- [ ] Kan controleren of een klant al geregistreerd is (F1)
-- [ ] Kan biljetten van 5, 10, 20 en 50 euro herkennen (F2)
+- [x] Kan controleren of een klant al geregistreerd is (F1)
+- [x] Kan biljetten van 5, 10, 20 en 50 euro herkennen (F2)
 - [ ] Kan foutmeldingen en waarschuwingen opslaan in het logboek (F3)
 
 ---
