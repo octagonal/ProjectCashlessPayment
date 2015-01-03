@@ -1,0 +1,76 @@
+﻿<UserControl x:Class="nmct.ba.cashlessproject.medewerker.View.Sales"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="600">
+    <UserControl.Resources>
+        <DataTemplate x:Key="Product">
+            <TextBlock>
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="{}{0}, €{1}">
+                        <Binding Path="ProductName"/>
+                        <Binding Path="Price"/>
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="9*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Column="0" Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Content="Klant: Anthony"></Label>
+            <Label Grid.Row="1" Content="Huidig saldo: €95"></Label>
+            <Label Grid.Row="2" ContentStringFormat="Saldo na bestelling: €50 (-€45)"></Label>
+            <Button Grid.Row="3" Content="Kaart uitwerpen" Grid.RowSpan="3" Command="{Binding RemoveCardCommand}"></Button>
+        </Grid>
+        <Grid Grid.Column="2" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="9*"></RowDefinition>
+                <RowDefinition Height="60"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Button Grid.Row="0" Grid.ColumnSpan="2" Content="Bestelling doorvoeren" Command="{Binding PayBillCommand}"></Button>
+            <ListBox Grid.Row="1" Grid.ColumnSpan="2" SelectionMode="Single" ItemsSource="{Binding ProductsToBuy}" ItemTemplate="{StaticResource Product}" SelectedItem="{Binding SelectedProductToBuy, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"></ListBox>
+            <Button Grid.Row="2" Content="-" FontSize="30px" Command="{Binding RemoveProductFromBillCommand}"></Button>
+            <Label Grid.Row="2" Grid.Column="1" Content="{Binding AmountToPay}" ContentStringFormat="Totaal: €{0}"></Label>
+        </Grid>
+        <Grid Grid.Column="4" Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="9*"></RowDefinition>
+                <RowDefinition Height="60"></RowDefinition>
+            </Grid.RowDefinitions>
+            <ListBox Grid.Row="0" SelectionMode="Single" ItemsSource="{Binding Products, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemTemplate="{StaticResource Product}" SelectedItem="{Binding SelectedProduct}">
+                
+            </ListBox>
+            <Button Grid.Row="1" Content="+" FontSize="30px" Command="{Binding AddProductToBillCommand}"></Button>
+        </Grid>
+        <Grid Grid.Row="1" Grid.ColumnSpan="6">
+            
+        </Grid>
+    </Grid>
+</UserControl>
