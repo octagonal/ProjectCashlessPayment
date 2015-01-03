@@ -23,6 +23,8 @@ namespace nmct.ba.cashlessproject.medewerker.ViewModel
 
         public RelayCommand PayBillCommand { get; private set; }
 
+        public RelayCommand LogoutEmployeeCommand { get; private set; }
+
         public SalesVM()
         {
             ApplicationVM appvm = App.Current.MainWindow.DataContext as ApplicationVM;
@@ -32,11 +34,18 @@ namespace nmct.ba.cashlessproject.medewerker.ViewModel
             GetProducts();
 
             Customer = new Customer();
+            Employee = new Employee();
+
             CustomerLoggedIn = false;
+            EmployeeLoggedIn = false;
 
             PayBillCommand = new RelayCommand(
                 PayBill, 
                 () => { return (Customer != null && AmountToPay < Customer.Balance); }
+            );
+
+            LogoutEmployeeCommand = new RelayCommand(
+                LogoutEmployee
             ); 
         }
 
@@ -101,6 +110,20 @@ namespace nmct.ba.cashlessproject.medewerker.ViewModel
             await RefreshCustomer(Customer);
             ProductsToBuy.Clear();
         }
+
+        private void LogoutEmployee()
+        {
+            if (EmployeeLoggedIn)
+            {
+                EmployeeLoggedIn = false;
+                Employee = new Employee();
+            }
+            else
+            {
+                EmployeeLoggedIn = true;
+                LoginEmployee();
+            }
+        }
         public ICommand RemoveProductFromBillCommand
         {
             get { return new RelayCommand(RemoveProductFromBill); }
@@ -164,6 +187,14 @@ namespace nmct.ba.cashlessproject.medewerker.ViewModel
             set { _customer = value; OnPropertyChanged("Customer"); }
         }
 
+        private Employee _employee;
+
+        public Employee Employee
+        {
+            get { return _employee; }
+            set { _employee = value; OnPropertyChanged("Employee"); }
+        }
+
         private string _customerStageMsg;
         public string CustomerStateMsg
         {
@@ -187,7 +218,33 @@ namespace nmct.ba.cashlessproject.medewerker.ViewModel
                 OnPropertyChanged("CustomerLoggedIn"); 
             }
         }
-        
+
+        private bool _employeeLoggedIn;
+
+        public bool EmployeeLoggedIn
+        {
+            get { return _employeeLoggedIn; }
+            set
+            {
+                if (value == true)
+                {
+                    EmployeeStateMsg = "Uitloggen";
+                }
+                else
+                {
+                    EmployeeStateMsg = "Inloggen";
+                }
+                _employeeLoggedIn = value;
+                OnPropertyChanged("EmployeeLoggedIn");
+            }
+        }
+
+        private string _employeeStageMsg;
+        public string EmployeeStateMsg
+        {
+            get { return _employeeStageMsg; }
+            set { _employeeStageMsg = value; OnPropertyChanged("EmployeeStateMsg"); }
+        }
 
         private async void GetProducts()
         {
@@ -302,6 +359,67 @@ namespace nmct.ba.cashlessproject.medewerker.ViewModel
             }
             AmountToPay = 0;
             PayBillCommand.RaiseCanExecuteChanged();
+        }
+
+        private void LoginEmployee()
+        {
+            Card card = null;
+            Manager engine = new Manager();
+            engine.Active = true;
+            CardReader reader = engine.GetReader(0);
+            if (reader != null)
+            {
+                reader.ActivateCard();
+                card = reader.GetCard();
+                if (card != null)
+                {
+                    Identity identity = card.ReadIdentity();
+                    if (identity != null)
+                    {
+                        Console.WriteLine(identity.NationalNumber);
+                        Employee.NationalNumber = identity.NationalNumber;
+                    }
+                }
+                reader.DeactivateCard();
+            }
+            card = reader.GetCard();
+            if (reader.CardPresent) { card = reader.GetCard(); }
+
+            engine.Dispose();
+
+            ApplicationVM appvm = App.Current.MainWindow.DataContext as ApplicationVM;
+
+            ApplicationVM.token = GetToken();
+
+            if (!ApplicationVM.token.IsError)
+                GetEmployee();
+        }
+
+        private async void GetEmployee()
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                client.SetBearerToken(ApplicationVM.token.AccessToken);
+                HttpResponseMessage response = await client.GetAsync(lib.Constants.WEBURL + "api/employee/" + Employee.NationalNumber);
+                if (response.IsSuccessStatusCode)
+                {
+                    string json = await response.Content.ReadAsStringAsync();
+                    Employee = JsonConvert.DeserializeObject<Employee>(json);
+
+                    /*if (Customer.ID == 0)
+                    {
+                        Customer = BuildCustomer();
+                        RegisterCustomer(Customer);
+                    }*/
+                }
+                else
+                {
+                    Employee = new Employee();
+                    Console.WriteLine("No employee");
+                }
+            }
+            //AmountToPay = 0;
+            //PayBillCommand.RaiseCanExecuteChanged();
         }
 
     }
