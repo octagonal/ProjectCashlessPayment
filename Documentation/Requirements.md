@@ -40,14 +40,14 @@
 ## Desktop App: C+E
 
 ### Vereniging: medewerker (C)
-- [ ] Kan zichzelf identificeren (C1)
-- [ ] Kan een klant identificeren (C2)
-- [ ] Kan het saldo van een kaart weergeven (C3)
-- [ ] Kan een bestelling ingeven (C4)
+- [x] Kan zichzelf identificeren (C1)
+- [x] Kan een klant identificeren (C2)
+- [x] Kan het saldo van een kaart weergeven (C3)
+- [x] Kan een bestelling ingeven (C4)
 
 ### Kassasysteem: medewerkers (E)
-- [ ] Kan waarschuwing geven als de prijs groter wordt dan het saldo (E1)
-- [ ] Kan het saldo van de kaart aanpassen (E2)
+- [x] Kan waarschuwing geven als de prijs groter wordt dan het saldo (E1)
+- [x] Kan het saldo van de kaart aanpassen (E2)
 - [ ] Kan de bestelling opslaan voor de statistieken (E3)
 - [ ] Kan foutmeldingen en waarschuwingen opslaan in het logboek (E4)
 
