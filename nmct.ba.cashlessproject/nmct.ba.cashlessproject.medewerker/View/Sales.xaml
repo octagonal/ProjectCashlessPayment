@@ -39,10 +39,18 @@
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Label Grid.Row="0" Content="Klant: Anthony"></Label>
-            <Label Grid.Row="1" Content="Huidig saldo: €95"></Label>
+            <Label Grid.Row="0" Content="{Binding Customer.CustomerName}" ContentStringFormat="Klant: {0}"></Label>
+            <Label Grid.Row="1" Content="{Binding Customer.Balance}" ContentStringFormat="Huidig saldo: €{0}"></Label>
             <Label Grid.Row="2" ContentStringFormat="Saldo na bestelling: €50 (-€45)"></Label>
-            <Button Grid.Row="3" Content="Kaart uitwerpen" Grid.RowSpan="3" Command="{Binding RemoveCardCommand}"></Button>
+            <TextBox Grid.Row="2">
+                <TextBox.Text>
+                    <MultiBinding StringFormat="Saldo na bestelling: €{0} (-€{1}).">
+                        <Binding Path="AfterSale" />
+                        <Binding Path="AmountToPay" />
+                    </MultiBinding>
+                </TextBox.Text>
+            </TextBox>
+            <Button Grid.Row="3" Content="{Binding CustomerStateMsg}" Grid.RowSpan="3" Command="{Binding RemoveCardCommand}"></Button>
         </Grid>
         <Grid Grid.Column="2" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
