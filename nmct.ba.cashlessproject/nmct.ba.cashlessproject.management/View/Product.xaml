@@ -21,17 +21,17 @@
         </Grid.ColumnDefinitions>
         <TextBlock Text="Products" FontSize="24"/>
         <ListBox Grid.Row="1" ItemsSource="{Binding Products}" DisplayMemberPath="ProductName" SelectedItem="{Binding SelectedProduct}"/>
-        <StackPanel Grid.Column="1" Grid.RowSpan="2" Margin="64">
+        <StackPanel Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Margin="0">
             <StackPanel Orientation="Horizontal">
                 <Button Content="New" Command="{Binding NewProductCommand}"/>
                 <Button Content="Save" Command="{Binding SaveProductCommand}" Margin="8,0,0,0"/>
                 <Button Content="Delete" Command="{Binding DeleteProductCommand}" Margin="8,0,0,0"/>
             </StackPanel>
-            <StackPanel Margin="0,8,0,0">
+            <StackPanel Margin="0,0,0,0">
                 <Label Content="Name:"/>
                 <TextBox Text="{Binding SelectedProduct.ProductName}" Margin="0,8,0,0"/>
                 <Label Content="Price:"/>
-                <TextBox Text="{Binding SelectedProduct.Price}" Margin="0,8,0,0"/>
+                <TextBox Text="{Binding SelectedProduct.Price}" Margin="0,0,0,0"/>
             </StackPanel>
         </StackPanel>
     </Grid>

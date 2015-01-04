@@ -21,13 +21,13 @@
         </Grid.ColumnDefinitions>
         <TextBlock Text="Registers" FontSize="24"/>
         <ListBox Grid.Row="1" ItemsSource="{Binding Registers}" DisplayMemberPath="RegisterName" SelectedItem="{Binding SelectedRegister}"/>
-        <StackPanel Grid.Column="1" Grid.RowSpan="2" Margin="64">
+        <StackPanel Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Margin="0">
             <!--<StackPanel Orientation="Horizontal">
                 <Button Content="New" Command="{Binding NewRegisterCommand}"/>
                 <Button Content="Save" Command="{Binding SaveRegisterCommand}" Margin="8,0,0,0"/>
                 <Button Content="Delete" Command="{Binding DeleteRegisterCommand}" Margin="8,0,0,0"/>
             </StackPanel>-->
-            <StackPanel Margin="0,8,0,0">
+            <StackPanel Margin="0,0,0,0">
                 <Label Content="Name:"/>
                 <Label Content="{Binding SelectedRegister.RegisterName}" Margin="0,8,0,0"/>
                 <Label Content="Device:"/>

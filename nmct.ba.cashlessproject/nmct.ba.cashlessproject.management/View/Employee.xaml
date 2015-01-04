@@ -21,7 +21,7 @@
         </Grid.ColumnDefinitions>
         <TextBlock Text="Employees" FontSize="24"/>
         <ListBox Grid.Row="1" ItemsSource="{Binding Employees}" DisplayMemberPath="EmployeeName" SelectedItem="{Binding SelectedEmployee}"/>
-        <StackPanel Grid.Column="1" Grid.RowSpan="2" Margin="64">
+        <StackPanel Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Margin="0">
             <StackPanel Orientation="Horizontal">
                 <Button Content="New" Command="{Binding NewEmployeeCommand}"/>
                 <Button Content="Save" Command="{Binding SaveEmployeeCommand}" Margin="8,0,0,0"/>

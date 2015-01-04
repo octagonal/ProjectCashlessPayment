@@ -10,11 +10,10 @@
         <vm:LoginVM/>
     </UserControl.DataContext>
     
-    <StackPanel Background="Azure">
+    <StackPanel>
         <TextBlock Text="Login:" Margin="4"/>
         <TextBox Text="{Binding Username}" Margin="8"/>
         <TextBlock Text="Password:" Margin="4"/>
-        <!-- replace with password box and "break" the MVVM pattern: http://stackoverflow.com/questions/1483892/how-to-bind-to-a-passwordbox-in-mvvm-->
         <TextBox Text="{Binding Password}" Margin="8"/>
         <Button Content="Aanmelden" Command="{Binding LoginCommand}" Margin="8"/>
         <TextBlock Foreground="Red" Text="{Binding Error}"/>
