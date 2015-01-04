@@ -25,6 +25,8 @@ namespace nmct.ba.cashlessproject.medewerker.ViewModel
 
         public RelayCommand LogoutEmployeeCommand { get; private set; }
 
+        public RelayCommand AddProductToBillCommand { get; private set; }
+
         public SalesVM()
         {            
             ApplicationVM appvm = App.Current.MainWindow.DataContext as ApplicationVM;
@@ -43,12 +45,17 @@ namespace nmct.ba.cashlessproject.medewerker.ViewModel
 
             PayBillCommand = new RelayCommand(
                 PayBill, 
-                () => { return (Customer != null && AmountToPay < Customer.Balance); }
+                () => { return (CustomerLoggedIn && EmployeeLoggedIn && AmountToPay < Customer.Balance); }
             );
 
             LogoutEmployeeCommand = new RelayCommand(
                 LogoutEmployee
             ); 
+
+            AddProductToBillCommand = new RelayCommand(
+                AddProductToBill,
+                () => { return (CustomerLoggedIn && EmployeeLoggedIn);}
+            );
         }
 
         private TokenResponse GetToken()
@@ -98,11 +105,15 @@ namespace nmct.ba.cashlessproject.medewerker.ViewModel
                 Customer = new Customer();
                 ProductsToBuy.Clear();
                 AmountToPay = 0;
+                PayBillCommand.RaiseCanExecuteChanged();
+                AddProductToBillCommand.RaiseCanExecuteChanged();
             }
             else
             {
                 CustomerLoggedIn = true;
                 LoginCustomer();
+                PayBillCommand.RaiseCanExecuteChanged();
+                AddProductToBillCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -137,11 +148,15 @@ namespace nmct.ba.cashlessproject.medewerker.ViewModel
             {
                 EmployeeLoggedIn = false;
                 Employee = new Employee();
+                PayBillCommand.RaiseCanExecuteChanged();
+                AddProductToBillCommand.RaiseCanExecuteChanged();
             }
             else
             {
                 EmployeeLoggedIn = true;
                 LoginEmployee();
+                PayBillCommand.RaiseCanExecuteChanged();
+                AddProductToBillCommand.RaiseCanExecuteChanged();
             }
         }
         public ICommand RemoveProductFromBillCommand
@@ -163,11 +178,6 @@ namespace nmct.ba.cashlessproject.medewerker.ViewModel
                     ProductsToBuy.RemoveAt(0); //Selectie bug?
             }
             AmountToPay = ProductsToBuy.Sum(el => el.Price);
-        }
-
-        public ICommand AddProductToBillCommand
-        {
-            get { return new RelayCommand(AddProductToBill); }
         }
 
         private void AddProductToBill()
