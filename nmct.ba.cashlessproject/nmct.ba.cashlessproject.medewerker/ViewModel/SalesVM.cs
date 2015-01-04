@@ -26,10 +26,12 @@ namespace nmct.ba.cashlessproject.medewerker.ViewModel
         public RelayCommand LogoutEmployeeCommand { get; private set; }
 
         public SalesVM()
-        {
+        {            
             ApplicationVM appvm = App.Current.MainWindow.DataContext as ApplicationVM;
             ApplicationVM.token = GetToken();
-            
+
+            GetSales();
+
             ProductsToBuy = new ObservableCollection<Product>();
             GetProducts();
 
@@ -120,7 +122,7 @@ namespace nmct.ba.cashlessproject.medewerker.ViewModel
                     ProductId = prodGroup.Key,
                     RegisterId = Convert.ToInt32(lib.Constants.MockCredentials["RegisterID"]),
                     Timestamp = DateTime.Now,
-                    TotalPrice = Convert.ToInt32(prodGroup.Count() * prodGroup.Sum())
+                    TotalPrice = prodGroup.Count() * prodGroup.Sum()
                 });
             }
 
@@ -445,6 +447,25 @@ namespace nmct.ba.cashlessproject.medewerker.ViewModel
                 }
             }
         }
-
+        private async void GetSales()
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                client.SetBearerToken(ApplicationVM.token.AccessToken);
+                // {type     }/ {id    }/ {periodStart      }/ {periodEnd       }
+                // string type, int? id, DateTime periodStart, DateTime periodEnd
+                HttpResponseMessage response = await client.GetAsync(lib.Constants.WEBURL + "api/sale/product/2/" + Convert.ToString(DateTime.Now.AddYears(-1).ToEpochTime()) + "/" + Convert.ToString(DateTime.Now.ToEpochTime()));
+                //HttpResponseMessage response = await client.GetAsync(lib.Constants.WEBURL + "api/sale");
+                if (response.IsSuccessStatusCode)
+                {
+                    string json = await response.Content.ReadAsStringAsync();
+                    List<Sale> saleList = JsonConvert.DeserializeObject<List<Sale>>(json);
+                }
+                else
+                {
+                    Console.WriteLine("No employee");
+                }
+            }
+        }
     }
 }
