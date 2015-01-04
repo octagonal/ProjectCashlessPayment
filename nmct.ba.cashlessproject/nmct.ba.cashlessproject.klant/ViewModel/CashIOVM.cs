@@ -51,7 +51,7 @@ namespace nmct.ba.cashlessproject.klant.ViewModel
             );
 
             PrintBalanceCommand = new RelayCommand(
-                () => MessageBox.Show(CurrentAmountUpload.ToString(), "Error"),
+                () => MessageBox.Show("Printer Malfunction.", "Error"),
                 () => Customer != null
             );
 

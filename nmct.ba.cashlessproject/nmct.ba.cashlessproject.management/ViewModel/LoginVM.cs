@@ -65,8 +65,11 @@ namespace nmct.ba.cashlessproject.management.ViewModel
         private TokenResponse GetToken()
         {
             OAuth2Client client = new OAuth2Client(new Uri(lib.Constants.WEBURL + "token"));
-            // return client.RequestResourceOwnerPasswordAsync(Username, Password).Result;
-            return client.RequestResourceOwnerPasswordAsync(lib.Constants.MockCredentials["Username"], lib.Constants.MockCredentials["Password"]).Result;
+            #if DEBUG
+                return client.RequestResourceOwnerPasswordAsync(lib.Constants.MockCredentials["Username"], lib.Constants.MockCredentials["Password"]).Result;
+            #else
+                return client.RequestResourceOwnerPasswordAsync(Username, Password).Result;
+            #endif
         }
     }
 }

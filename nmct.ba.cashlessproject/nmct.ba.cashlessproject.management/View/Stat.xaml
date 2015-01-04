@@ -24,8 +24,8 @@
         <TextBlock Text="Statistics" Grid.ColumnSpan="2" FontSize="24"/>
         <TextBlock Text="Select Product" Grid.ColumnSpan="2" Grid.Row="1" FontSize="12"/>
         <TextBlock Text="Select Register" Grid.ColumnSpan="2" Grid.Row="1" Grid.Column="1" FontSize="12"/>
-        <ListBox Grid.Row="2" ItemsSource="{Binding Products}" DisplayMemberPath="ProductName" SelectedItem="{Binding SelectedProduct}"/>
-        <ListBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Registers}" DisplayMemberPath="RegisterName" SelectedItem="{Binding SelectedRegister}"/>
+        <ListBox Grid.Row="2" BorderBrush="Black" BorderThickness="0,0,1,0" ItemsSource="{Binding Products}" DisplayMemberPath="ProductName" SelectedItem="{Binding SelectedProduct}"/>
+        <ListBox Grid.Row="2" BorderBrush="Black" BorderThickness="0,0,1,0" Grid.Column="1" ItemsSource="{Binding Registers}" DisplayMemberPath="RegisterName" SelectedItem="{Binding SelectedRegister}"/>
         <StackPanel Grid.Column="2" Grid.RowSpan="1" Grid.Row="1" Margin="0">
             <StackPanel Orientation="Horizontal">
                 <Label Content="From:"></Label>

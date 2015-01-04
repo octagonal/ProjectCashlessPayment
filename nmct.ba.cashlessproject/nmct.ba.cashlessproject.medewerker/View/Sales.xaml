@@ -42,14 +42,14 @@
             <Label Grid.Row="0" Content="{Binding Customer.CustomerName}" ContentStringFormat="Klant: {0}"></Label>
             <Label Grid.Row="1" Content="{Binding Customer.Balance}" ContentStringFormat="Huidig saldo: €{0}"></Label>
             <Label Grid.Row="2" ContentStringFormat="Saldo na bestelling: €50 (-€45)"></Label>
-            <TextBox Grid.Row="2">
-                <TextBox.Text>
+            <TextBlock Grid.Row="2">
+                <TextBlock.Text>
                     <MultiBinding StringFormat="Saldo na bestelling: €{0} (-€{1}).">
                         <Binding Path="AfterSale" />
                         <Binding Path="AmountToPay" />
                     </MultiBinding>
-                </TextBox.Text>
-            </TextBox>
+                </TextBlock.Text>
+            </TextBlock>
             <Button Grid.Row="3" Content="{Binding CustomerStateMsg}" Grid.RowSpan="3" Command="{Binding RemoveCardCommand}"></Button>
         </Grid>
         <Grid Grid.Column="2" Grid.ColumnSpan="2">
@@ -63,7 +63,7 @@
                 <RowDefinition Height="60"></RowDefinition>
             </Grid.RowDefinitions>
             <Button Grid.Row="0" Grid.ColumnSpan="2" Content="Bestelling uitvoeren" Command="{Binding PayBillCommand}"></Button>
-            <ListBox Grid.Row="1" Grid.ColumnSpan="2" SelectionMode="Single" ItemsSource="{Binding ProductsToBuy}" ItemTemplate="{StaticResource Product}" SelectedItem="{Binding SelectedProductToBuy, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"></ListBox>
+            <ListBox BorderBrush="Black" BorderThickness="1,0,1,0" Grid.Row="1" Grid.ColumnSpan="2" SelectionMode="Single" ItemsSource="{Binding ProductsToBuy}" ItemTemplate="{StaticResource Product}" SelectedItem="{Binding SelectedProductToBuy, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"></ListBox>
             <Button Grid.Row="2" Content="-" FontSize="30px" Command="{Binding RemoveProductFromBillCommand}"></Button>
             <Label Grid.Row="2" Grid.Column="1" Content="{Binding AmountToPay}" ContentStringFormat="Totaal: €{0}"></Label>
         </Grid>
@@ -82,7 +82,7 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Label Content="{Binding Employee.EmployeeName}" ContentStringFormat="Ingelogged als: {0}" Grid.Column="0"></Label>
+            <Label FontSize="16" Content="{Binding Employee.EmployeeName}" ContentStringFormat="Ingelogged als: {0}" Grid.Column="0"></Label>
             <Button Grid.Column="1" Content="{Binding EmployeeStateMsg}" Command="{Binding LogoutEmployeeCommand}"></Button>
         </Grid>
     </Grid>

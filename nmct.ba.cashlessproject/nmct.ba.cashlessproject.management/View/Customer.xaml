@@ -40,7 +40,7 @@
                 <Button Command="{Binding AddImageCommand}">
                     <Button.Template>
                         <ControlTemplate>
-                            <Border Margin="0,8,0,0" Width="200" Height="200" BorderThickness="2" CornerRadius="2" BorderBrush="Teal">
+                            <Border Margin="0,8,0,0" Width="200" Height="200" BorderThickness="1" CornerRadius="2" BorderBrush="Teal">
                                 <Image Source="{Binding SelectedCustomer.Picture, Converter={StaticResource StringToImageConverter}, UpdateSourceTrigger=PropertyChanged}" Stretch="UniformToFill"/>
                             </Border>
                         </ControlTemplate>
