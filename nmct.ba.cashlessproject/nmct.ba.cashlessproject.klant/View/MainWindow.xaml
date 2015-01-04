@@ -1,8 +1,9 @@
-﻿<Window x:Class="nmct.ba.cashlessproject.klant.MainWindow"
+﻿<Controls:MetroWindow x:Class="nmct.ba.cashlessproject.klant.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Klant" Height="350" Width="525"
+        Title="Klant" Height="800" Width="800"
         xmlns:v="clr-namespace:nmct.ba.cashlessproject.klant.View"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:vm="clr-namespace:nmct.ba.cashlessproject.klant.ViewModel"
 >
     <Window.DataContext>
@@ -24,4 +25,4 @@
         <ContentControl Grid.Row="0" Grid.Column="0" Content="{Binding CurrentPage}"/>
         <Button Grid.Row="1" Content="Kaart uitwerpen" Command="{Binding LogoutCommand}"></Button>
     </Grid>
-</Window>
+</Controls:MetroWindow>

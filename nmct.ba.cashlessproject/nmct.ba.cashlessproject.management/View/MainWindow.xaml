@@ -1,9 +1,11 @@
-﻿<Window x:Class="nmct.ba.cashlessproject.management.MainWindow"
+﻿<Controls:MetroWindow x:Class="nmct.ba.cashlessproject.management.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:v="clr-namespace:nmct.ba.cashlessproject.management.View"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:vm="clr-namespace:nmct.ba.cashlessproject.management.ViewModel"
         Title="Management"
+        Height="800" Width="800"
 >
     <Window.DataContext>
         <vm:ApplicationVM/>
@@ -36,7 +38,6 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="5*"/>
-            <ColumnDefinition Width="32"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Row="1" Grid.Column="0">
             <Grid.RowDefinitions>
@@ -46,7 +47,7 @@
             <ItemsControl Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Pages}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Button Content="{Binding Name}" Command="{Binding DataContext.ChangePageCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" CommandParameter="{Binding}"/>
+                        <Button Content="{Binding Name}" Margin="4" Command="{Binding DataContext.ChangePageCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" CommandParameter="{Binding}"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
@@ -54,4 +55,4 @@
         </Grid>
         <ContentControl Grid.RowSpan="2" Grid.Row="0" Grid.Column="1" Content="{Binding CurrentPage}"/>
     </Grid>
-</Window>
+</Controls:MetroWindow>

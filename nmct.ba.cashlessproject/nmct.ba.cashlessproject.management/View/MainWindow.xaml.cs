@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
+using MahApps.Metro.Controls;
 using System.Windows.Shapes;
 
 namespace nmct.ba.cashlessproject.management
@@ -18,7 +19,7 @@ namespace nmct.ba.cashlessproject.management
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : MetroWindow
     {
         public MainWindow()
         {
