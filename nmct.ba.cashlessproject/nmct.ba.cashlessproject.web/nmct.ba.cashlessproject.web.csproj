@@ -171,6 +171,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\API\EmployeeController.cs" />
+    <Compile Include="Controllers\API\SalesController.cs" />
     <Compile Include="Controllers\API\Register_Employee.cs" />
     <Compile Include="Controllers\API\RegisterController.cs" />
     <Compile Include="Controllers\API\ProductController.cs" />
@@ -187,6 +188,7 @@
     <Compile Include="Helper\MiscModelHelpers.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\API\EmployeeDA.cs" />
+    <Compile Include="Models\API\SaleDA.cs" />
     <Compile Include="Models\API\Register_EmployeeDA.cs" />
     <Compile Include="Models\API\RegisterDA.cs" />
     <Compile Include="Models\API\ProductDA.cs" />

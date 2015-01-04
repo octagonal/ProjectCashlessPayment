@@ -106,6 +106,24 @@ namespace nmct.ba.cashlessproject.medewerker.ViewModel
 
         private async void PayBill()
         {
+
+            IEnumerable<IGrouping<int, double>> query = 
+                ProductsToBuy.GroupBy(prod => prod.ID, prod => prod.Price);
+
+            foreach (IGrouping<int, double> prodGroup in query)
+            {
+                SaveSale(new Sale()
+                {
+                    Amount = prodGroup.Count(),
+                    CustomerId = Customer.ID,
+                    ID = 0,
+                    ProductId = prodGroup.Key,
+                    RegisterId = 1,
+                    Timestamp = DateTime.Now,
+                    TotalPrice = Convert.ToInt32(prodGroup.Count() * prodGroup.Sum())
+                });
+            }
+
             SaveCash();
             await RefreshCustomer(Customer);
             ProductsToBuy.Clear();
@@ -265,12 +283,26 @@ namespace nmct.ba.cashlessproject.medewerker.ViewModel
             }
         }
 
+        private async void SaveSale(Sale sale)
+        {
+            string input = JsonConvert.SerializeObject(sale);
+
+            using (HttpClient client = new HttpClient())
+            {
+                client.SetBearerToken(ApplicationVM.token.AccessToken);
+                HttpResponseMessage response = await client.PostAsync(lib.Constants.WEBURL + "/api/sale", new StringContent(input, Encoding.UTF8, "application/json"));
+                if (!response.IsSuccessStatusCode)
+                {
+                    Console.WriteLine("error");
+                }
+            }
+        }
+
         private async void SaveCash()
         {
             Customer.Balance -= AmountToPay;
             string input = JsonConvert.SerializeObject(Customer);
 
-            // check insert (no ID assigned) or update (already an ID assigned)
             using (HttpClient client = new HttpClient())
             {
                 client.SetBearerToken(ApplicationVM.token.AccessToken);
