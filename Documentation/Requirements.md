@@ -48,7 +48,7 @@
 ### Kassasysteem: medewerkers (E)
 - [x] Kan waarschuwing geven als de prijs groter wordt dan het saldo (E1)
 - [x] Kan het saldo van de kaart aanpassen (E2)
-- [ ] Kan de bestelling opslaan voor de statistieken (E3)
+- [x] Kan de bestelling opslaan voor de statistieken (E3)
 - [ ] Kan foutmeldingen en waarschuwingen opslaan in het logboek (E4)
 
 ---
