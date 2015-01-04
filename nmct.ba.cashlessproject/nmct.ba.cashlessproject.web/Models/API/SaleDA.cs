@@ -37,6 +37,38 @@ namespace nmct.ba.cashlessproject.web.Models.API
             DbDataReader reader = Database.GetData(Database.GetConnection(CreateConnectionString(claims)), sql);
             while (reader.Read())
             {
+                Console.WriteLine(reader["Amount"].ToString());
+                list.Add(BuildModel(reader));
+            }
+
+            return list;
+        }
+
+        public static List<Sale> GetSalesByDateAndType(int id, string type, DateTime periodStart, DateTime periodEnd, IEnumerable<Claim> claims)
+        {
+            List<Sale> list = new List<Sale>();
+            string sql = "SELECT * FROM CashlessCustomer_testDb.dbo.Sale WHERE Timestamp BETWEEN @PeriodStart AND @PeriodEnd AND " + type + "=@Id";
+            DbParameter par1 = Database.AddParameter("AdminDB", "@PeriodStart", periodStart);
+            DbParameter par2 = Database.AddParameter("AdminDB", "@PeriodEnd", periodEnd);
+            DbParameter par3 = Database.AddParameter("AdminDB", "@Id", id);
+            DbDataReader reader = Database.GetData(Database.GetConnection(CreateConnectionString(claims)), sql, par1, par2, par3);
+            while (reader.Read())
+            {
+                list.Add(BuildModel(reader));
+            }
+
+            return list;
+        }
+
+        public static List<Sale> GetSalesByDate(DateTime periodStart, DateTime periodEnd, IEnumerable<Claim> claims)
+        {
+            List<Sale> list = new List<Sale>();
+            string sql = "SELECT * FROM CashlessCustomer_testDb.dbo.Sale WHERE Timestamp BETWEEN @PeriodStart AND @PeriodEnd";
+            DbParameter par1 = Database.AddParameter("AdminDB", "@PeriodStart", periodStart);
+            DbParameter par2 = Database.AddParameter("AdminDB", "@PeriodEnd", periodEnd);
+            DbDataReader reader = Database.GetData(Database.GetConnection(CreateConnectionString(claims)), sql, par1, par2);
+            while (reader.Read())
+            {
                 list.Add(BuildModel(reader));
             }
 
@@ -53,22 +85,21 @@ namespace nmct.ba.cashlessproject.web.Models.API
                 ProductId = Int32.Parse(reader["ProductID"].ToString()),
                 RegisterId = Int32.Parse(reader["RegisterId"].ToString()),
                 Timestamp = Convert.ToDateTime(reader["Timestamp"].ToString()),
-                TotalPrice = Int32.Parse(reader["TotalPrice"].ToString())
+                TotalPrice = Convert.ToDouble(reader["TotalPrice"].ToString())
             };
         }
 
 
         public static int InsertSale(Sale c, IEnumerable<Claim> claims)
         {
-            string sql = "INSERT INTO Sale (CustomerID,RegisterID,ProductID,Amount,TotalPrice) VALUES(@CustomerID,@RegisterID,@ProductID,@Amount,@TotalPrice)";
-            //DbParameter par1 = Database.AddParameter("AdminDB", "@Timestamp", c.Timestamp);
+            string sql = "INSERT INTO Sale (Timestamp,CustomerID,RegisterID,ProductID,Amount,TotalPrice) VALUES(@Timestamp,@CustomerID,@RegisterID,@ProductID,@Amount,@TotalPrice)";
+            DbParameter par1 = Database.AddParameter("AdminDB", "@Timestamp", c.Timestamp);
             DbParameter par2 = Database.AddParameter("AdminDB", "@CustomerID", c.CustomerId);
             DbParameter par3 = Database.AddParameter("AdminDB", "@RegisterID", c.RegisterId);
             DbParameter par4 = Database.AddParameter("AdminDB", "@ProductID", c.ProductId);
             DbParameter par5 = Database.AddParameter("AdminDB", "@Amount", c.Amount);
             DbParameter par6 = Database.AddParameter("AdminDB", "@TotalPrice", c.TotalPrice);
-            return Database.InsertData(Database.GetConnection(CreateConnectionString(claims)), sql, /*par1,*/ par2, par3, par4, par5, par6);
+            return Database.InsertData(Database.GetConnection(CreateConnectionString(claims)), sql, par1, par2, par3, par4, par5, par6);
         }
-
     }
 }
