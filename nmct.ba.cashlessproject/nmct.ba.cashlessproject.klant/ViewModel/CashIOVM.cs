@@ -18,6 +18,7 @@ namespace nmct.ba.cashlessproject.klant.ViewModel
 {
     public class CashIOVM : ViewModelBase, IPage
     {
+
         public RelayCommand<object> AddCashCommand { get; private set; }
         public RelayCommand PrintBalanceCommand { get; private set; }
         public RelayCommand UploadCashCommand { get; private set; }
