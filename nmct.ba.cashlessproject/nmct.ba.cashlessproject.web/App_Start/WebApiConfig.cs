@@ -15,6 +15,12 @@ namespace nmct.ba.cashlessproject.web
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
+                    name: "SaleSpan",
+                    routeTemplate: "api/{controller}/{type}/{id}/{periodStart}/{periodEnd}",
+                    defaults: new { controller = "SaleController" }
+            );
+
+            config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
