@@ -129,10 +129,6 @@ CREATE TABLE [dbo].[Sale](
 ) ON [PRIMARY]
 
 GO
-SET IDENTITY_INSERT [dbo].[Customer] ON 
-INSERT [dbo].[Customer] ([ID], [CustomerName], [Address], [Picture], [Balance], [NationalNumber]) VALUES (1, N'Frederik Duchi', N'Graaf Karel De goedelaan 5', NULL, CAST(100 AS Numeric(18, 0)))
-INSERT [dbo].[Customer] ([ID], [CustomerName], [Address], [Picture], [Balance], [NationalNumber) VALUES (2, N'Lies Pinket', N'Renaat De Ruderlaan 7', NULL, CAST(200 AS Numeric(18, 0)))
-SET IDENTITY_INSERT [dbo].[Customer] OFF
 ALTER TABLE [dbo].[Errorlog]  WITH CHECK ADD  CONSTRAINT [FK_Errorlog_Register] FOREIGN KEY([RegisterID])
 REFERENCES [dbo].[Register] ([ID])
 GO
