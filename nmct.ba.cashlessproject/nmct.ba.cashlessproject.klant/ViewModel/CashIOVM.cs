@@ -66,7 +66,7 @@ namespace nmct.ba.cashlessproject.klant.ViewModel
             double amount = Convert.ToDouble(value);
             if (Customer != null)
             {
-                if ((CurrentAmountUpload + amount + Customer.Balance) <= (MaxCash))
+                if ((CurrentAmountUpload + amount /*+ Customer.Balance*/) <= (MaxCash))
                 {
                     return true;
                 }
