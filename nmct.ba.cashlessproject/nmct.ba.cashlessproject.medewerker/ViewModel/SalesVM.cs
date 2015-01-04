@@ -52,7 +52,7 @@ namespace nmct.ba.cashlessproject.medewerker.ViewModel
         private TokenResponse GetToken()
         {
             OAuth2Client client = new OAuth2Client(new Uri(lib.Constants.WEBURL + "token"));
-            return client.RequestResourceOwnerPasswordAsync("admin", "password").Result;
+            return client.RequestResourceOwnerPasswordAsync(lib.Constants.MockCredentials["Username"], lib.Constants.MockCredentials["Password"]).Result;
         }
 
         private ObservableCollection<Product> _products;
@@ -118,7 +118,7 @@ namespace nmct.ba.cashlessproject.medewerker.ViewModel
                     CustomerId = Customer.ID,
                     ID = 0,
                     ProductId = prodGroup.Key,
-                    RegisterId = 1,
+                    RegisterId = Convert.ToInt32(lib.Constants.MockCredentials["RegisterID"]),
                     Timestamp = DateTime.Now,
                     TotalPrice = Convert.ToInt32(prodGroup.Count() * prodGroup.Sum())
                 });

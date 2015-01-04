@@ -198,7 +198,7 @@ namespace nmct.ba.cashlessproject.klant.ViewModel
         {
             OAuth2Client client = new OAuth2Client(new Uri(lib.Constants.WEBURL + "token"));
             // return client.RequestResourceOwnerPasswordAsync(Username, Password).Result;
-            return client.RequestResourceOwnerPasswordAsync("admin", "password").Result;
+            return client.RequestResourceOwnerPasswordAsync(lib.Constants.MockCredentials["Username"], lib.Constants.MockCredentials["Password"]).Result;
         }
     }
 }
