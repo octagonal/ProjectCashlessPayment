@@ -19,6 +19,19 @@ namespace nmct.ba.cashlessproject.web.Controllers.API
             return SaleDA.GetSales(p.Claims);
         }
 
+        public List<Sale> Get(string type, int id, long periodStart, long periodEnd)
+        {
+            DateTime periodStartDT = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(periodStart);
+            DateTime periodEndDT = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(periodEnd);
+            ClaimsPrincipal p = RequestContext.Principal as ClaimsPrincipal;
+            if(type == "register")
+                return SaleDA.GetSalesByDateAndType(id, "RegisterID", new DateTime(1970,1,1,0,0,0,DateTimeKind.Utc).AddSeconds(periodStart), new DateTime(1970,1,1,0,0,0,DateTimeKind.Utc).AddSeconds(periodEnd), p.Claims);
+            if(type == "product")
+                return SaleDA.GetSalesByDateAndType(id, "ProductID", new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(periodStart), new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(periodEnd), p.Claims);
+            //if (type == "all")
+            return SaleDA.GetSalesByDate(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(periodStart), new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(periodEnd), p.Claims);
+        }
+
         public HttpResponseMessage Post(Sale c)
         {
             ClaimsPrincipal p = RequestContext.Principal as ClaimsPrincipal;

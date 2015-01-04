@@ -24,6 +24,9 @@
         <DataTemplate DataType="{x:Type vm:RegisterVM}">
             <v:Register/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:StatVM}">
+            <v:Stat/>
+        </DataTemplate>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>

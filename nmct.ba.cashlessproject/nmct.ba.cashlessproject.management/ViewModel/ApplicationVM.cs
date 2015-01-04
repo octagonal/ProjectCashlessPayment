@@ -71,6 +71,7 @@ namespace nmct.ba.cashlessproject.management.ViewModel
             Pages.Add(new CustomerVM());
             Pages.Add(new EmployeeVM());
             Pages.Add(new RegisterVM());
+            Pages.Add(new StatVM());
             LogoutCommand.RaiseCanExecuteChanged();
         }
 

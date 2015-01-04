@@ -89,6 +89,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ViewModel\ApplicationVM.cs" />
+    <Compile Include="ViewModel\StatVM.cs" />
     <Compile Include="ViewModel\EmployeeVM.cs" />
     <Compile Include="ViewModel\RegisterVM.cs" />
     <Compile Include="ViewModel\ProductVM.cs" />
@@ -97,6 +98,9 @@
     <Compile Include="ViewModel\LoginVM.cs" />
     <Compile Include="ViewModel\ObservableObject.cs" />
     <Compile Include="View\converters\StringToImageConverter.cs" />
+    <Compile Include="View\Stat.xaml.cs">
+      <DependentUpon>Stat.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Employee.xaml.cs">
       <DependentUpon>Employee.xaml</DependentUpon>
     </Compile>
@@ -119,6 +123,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\Stat.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\Employee.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
