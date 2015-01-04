@@ -80,6 +80,6 @@
 - [x] Kan gegevens (ook het saldo) van een klant wijzigen (B52)
 
 ### Beheer statistieken (B6)
-- [ ] Kan de totale verkoop opvragen over een bepaalde periode (B61)
-- [ ] Kan de verkoop per kassa opvragen over een bepaalde periode (B62)
-- [ ] Kan de verkoop per product opvragen over een bepaalde periode (B63)
+- [x] Kan de totale verkoop opvragen over een bepaalde periode (B61)
+- [x] Kan de verkoop per kassa opvragen over een bepaalde periode (B62)
+- [x] Kan de verkoop per product opvragen over een bepaalde periode (B63)
