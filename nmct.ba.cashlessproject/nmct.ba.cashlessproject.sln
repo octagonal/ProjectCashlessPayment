@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nmct.ba.cashlessproject.ui", "nmct.ba.cashlessproject.ui\nmct.ba.cashlessproject.ui.csproj", "{5B6527EC-F7CD-49A0-A195-4BE48C4FCBF1}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nmct.ba.cashlessproject.web", "nmct.ba.cashlessproject.web\nmct.ba.cashlessproject.web.csproj", "{F0DA09F6-0233-47A6-8023-AFDF13BE5036}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nmct.ba.cashlessproject.lib", "nmct.ba.cashlessproject.lib\nmct.ba.cashlessproject.lib.csproj", "{A6488B57-91CC-49E3-974E-13663CD631CE}"
@@ -25,12 +23,6 @@ Global
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5B6527EC-F7CD-49A0-A195-4BE48C4FCBF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5B6527EC-F7CD-49A0-A195-4BE48C4FCBF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5B6527EC-F7CD-49A0-A195-4BE48C4FCBF1}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{5B6527EC-F7CD-49A0-A195-4BE48C4FCBF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5B6527EC-F7CD-49A0-A195-4BE48C4FCBF1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5B6527EC-F7CD-49A0-A195-4BE48C4FCBF1}.Release|x64.ActiveCfg = Release|Any CPU
 		{F0DA09F6-0233-47A6-8023-AFDF13BE5036}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F0DA09F6-0233-47A6-8023-AFDF13BE5036}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F0DA09F6-0233-47A6-8023-AFDF13BE5036}.Debug|x64.ActiveCfg = Debug|Any CPU
