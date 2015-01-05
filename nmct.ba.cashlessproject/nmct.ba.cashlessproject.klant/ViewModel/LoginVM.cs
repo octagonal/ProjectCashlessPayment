@@ -164,6 +164,7 @@ namespace nmct.ba.cashlessproject.klant.ViewModel
                     {
                         Customer = BuildCustomer();
                         RegisterCustomer(Customer);
+                        GetCustomer();
                     }
                 }
                 else
@@ -185,7 +186,7 @@ namespace nmct.ba.cashlessproject.klant.ViewModel
                 if (response.IsSuccessStatusCode)
                 {
                     string output = await response.Content.ReadAsStringAsync();
-                    c.ID = Int32.Parse(output);
+                    //c.ID = Int32.Parse(output);
                 }
                 else
                 {

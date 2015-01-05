@@ -82,7 +82,7 @@ namespace nmct.ba.cashlessproject.management.ViewModel
                 using (HttpClient client = new HttpClient())
                 {
                     client.SetBearerToken(ApplicationVM.token.AccessToken);
-                    HttpResponseMessage response = await client.GetAsync(lib.Constants.WEBURL + "api/sale/product/4/" + Convert.ToString(SelectedFromDate.ToEpochTime()) + "/" + Convert.ToString(SelectedUntilDate.ToEpochTime()));
+                    HttpResponseMessage response = await client.GetAsync(lib.Constants.WEBURL + "api/sale/all/0/" + Convert.ToString(SelectedFromDate.ToEpochTime()) + "/" + Convert.ToString(SelectedUntilDate.ToEpochTime()));
                     if (response.IsSuccessStatusCode)
                     {
                         string json = await response.Content.ReadAsStringAsync();

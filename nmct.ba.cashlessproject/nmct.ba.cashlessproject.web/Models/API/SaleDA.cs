@@ -47,7 +47,7 @@ namespace nmct.ba.cashlessproject.web.Models.API
         public static List<Sale> GetSalesByDateAndType(int id, string type, DateTime periodStart, DateTime periodEnd, IEnumerable<Claim> claims)
         {
             List<Sale> list = new List<Sale>();
-            string sql = "SELECT * FROM CashlessCustomer_testDb.dbo.Sale WHERE Timestamp BETWEEN @PeriodStart AND @PeriodEnd AND " + type + "=@Id";
+            string sql = "SELECT * FROM Sale WHERE Timestamp BETWEEN @PeriodStart AND @PeriodEnd AND " + type + "=@Id";
             DbParameter par1 = Database.AddParameter("AdminDB", "@PeriodStart", periodStart);
             DbParameter par2 = Database.AddParameter("AdminDB", "@PeriodEnd", periodEnd);
             DbParameter par3 = Database.AddParameter("AdminDB", "@Id", id);
@@ -63,7 +63,7 @@ namespace nmct.ba.cashlessproject.web.Models.API
         public static List<Sale> GetSalesByDate(DateTime periodStart, DateTime periodEnd, IEnumerable<Claim> claims)
         {
             List<Sale> list = new List<Sale>();
-            string sql = "SELECT * FROM CashlessCustomer_testDb.dbo.Sale WHERE Timestamp BETWEEN @PeriodStart AND @PeriodEnd";
+            string sql = "SELECT * FROM Sale WHERE Timestamp BETWEEN @PeriodStart AND @PeriodEnd";
             DbParameter par1 = Database.AddParameter("AdminDB", "@PeriodStart", periodStart);
             DbParameter par2 = Database.AddParameter("AdminDB", "@PeriodEnd", periodEnd);
             DbDataReader reader = Database.GetData(Database.GetConnection(CreateConnectionString(claims)), sql, par1, par2);
