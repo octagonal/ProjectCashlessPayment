@@ -178,6 +178,7 @@
     <Compile Include="Controllers\API\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ErrorlogController.cs" />
     <Compile Include="Controllers\Organisation_RegisterController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\OrganisationController.cs" />
@@ -196,6 +197,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Organisation_RegisterDA.cs" />
+    <Compile Include="Models\ErrorLogDA.cs" />
     <Compile Include="Models\RegisterDA.cs" />
     <Compile Include="Models\OrganisationDA.cs" />
     <Compile Include="Models\VM\Organisation_RegisterVM.cs" />
@@ -280,6 +282,10 @@
     <Content Include="Views\Shared\_OrganisationPartial.cshtml" />
     <Content Include="Views\Shared\_Organisation_RegisterPartial.cshtml" />
     <Content Include="Views\Shared\_RegisterPartial.cshtml" />
+    <Content Include="Views\Errorlog\Index.cshtml" />
+    <Content Include="Views\Errorlog\Details.cshtml" />
+    <Content Include="Views\Shared\_ErrorlogPartial.cshtml" />
+    <Content Include="Views\Errorlog\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

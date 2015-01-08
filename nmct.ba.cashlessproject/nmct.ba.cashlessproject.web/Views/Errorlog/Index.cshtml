@@ -1,0 +1,8 @@
+﻿@model IEnumerable<nmct.ba.cashlessproject.web.Models.VM.Organisation_RegisterVM>
+
+
+@{
+    ViewBag.Title = "Assigned Registers";
+}
+
+@Html.Partial("_ErrorlogPartial", nmct.ba.cashlessproject.web.Models.VM.Organisation_RegisterVM.FillVMList())

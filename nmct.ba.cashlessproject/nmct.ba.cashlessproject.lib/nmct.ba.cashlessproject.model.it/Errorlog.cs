@@ -10,7 +10,7 @@ namespace nmct.ba.cashlessproject.model.it
     {
         private int _registerId;
 
-        public int RegisterId
+        public int RegisterID
         {
             get { return _registerId; }
             set { _registerId = value; }

@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace nmct.ba.cashlessproject.web.Controllers
 {
+	[Authorize]
     public class RegisterController : Controller
     {
         // GET: Register
