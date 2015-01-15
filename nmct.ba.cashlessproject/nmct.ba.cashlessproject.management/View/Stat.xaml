@@ -31,7 +31,7 @@
                 <Label Content="From:"></Label>
                 <DatePicker SelectedDate="{Binding SelectedFromDate }"></DatePicker>
                 <Label Content="Until:"></Label>
-                <DatePicker SelectedDate="{Binding SelectedUntilDate }"></DatePicker>
+                <DatePicker  SelectedDate="{Binding SelectedUntilDate }"></DatePicker>
             </StackPanel>
         </StackPanel>
         <DataGrid Grid.Row="2" Grid.Column="2" ItemsSource="{Binding Sales}" IsReadOnly="True" />

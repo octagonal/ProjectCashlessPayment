@@ -28,7 +28,7 @@ namespace nmct.ba.cashlessproject.web.Models.API
 
 
             List<Employee> list = new List<Employee>();
-            string sql = "SELECT * FROM Employee";
+	    string sql = "SELECT * FROM Employee WHERE (Hidden <> 1) OR (Hidden IS NULL)";
             DbDataReader reader = Database.GetData(Database.GetConnection(CreateConnectionString(claims)), sql);
             while (reader.Read())
             {
@@ -41,7 +41,7 @@ namespace nmct.ba.cashlessproject.web.Models.API
         public static Employee GetEmployee(string natNum, IEnumerable<Claim> claims)
         {
             Employee c = new Employee();
-            string sql = "SELECT * FROM Employee WHERE NationalNumber=@NationalNumber";
+            string sql = "SELECT * FROM Employee WHERE ((Hidden <> 1) OR (Hidden IS NULL)) AND NationalNumber=@NationalNumber";
             DbParameter par1 = Database.AddParameter("AdminDB", "@NationalNumber", natNum);
             DbDataReader reader = Database.GetData(Database.GetConnection(CreateConnectionString(claims)), sql, par1);
             while (reader.Read())
@@ -102,7 +102,7 @@ namespace nmct.ba.cashlessproject.web.Models.API
 
         public static void DeleteEmployee(int id, IEnumerable<Claim> claims)
         {
-            string sql = "DELETE FROM Employee WHERE ID=@ID";
+            string sql = "UPDATE Employee SET Hidden=1 WHERE ID=@ID";
             DbParameter par1 = Database.AddParameter("AdminDB", "@ID", id);
             DbConnection con = Database.GetConnection(CreateConnectionString(claims));
             Database.ModifyData(con, sql, par1);

@@ -19,7 +19,7 @@
 
 ### IT bedrijf: Logging (A3)
 - [ ] Kan een logboek van foutmeldingen en waarschuwingen van de kassa’s aanmaken (A31)
-- [ ] Kan een logboek van foutmeldingen en waarschuwingen van de kassa’s opvragen (A32)
+- [x] Kan een logboek van foutmeldingen en waarschuwingen van de kassa’s opvragen (A32)
 
 ---
 

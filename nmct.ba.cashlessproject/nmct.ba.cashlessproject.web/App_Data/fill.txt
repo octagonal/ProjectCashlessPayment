@@ -38,7 +38,8 @@ CREATE TABLE [dbo].[Employee](
 	[Address] [nvarchar](50) NOT NULL,
 	[Email] [nvarchar](50) NOT NULL,
 	[Phone] [nvarchar](50) NOT NULL,
-	[NationalNumber] [nvarchar](50) NOT NULL
+	[NationalNumber] [nvarchar](50) NOT NULL,
+	[Hidden] [bit],
  CONSTRAINT [PK_Employee] PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC
@@ -71,6 +72,7 @@ CREATE TABLE [dbo].[Product](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
 	[ProductName] [nvarchar](50) NOT NULL,
 	[Price] [numeric](5, 2) NOT NULL,
+	[Hidden] [bit],
  CONSTRAINT [PK_Product] PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC

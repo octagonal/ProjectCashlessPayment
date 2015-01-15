@@ -13,7 +13,7 @@ namespace nmct.ba.cashlessproject.lib
         public static Dictionary<string, string> MockCredentials = new Dictionary<string, string>(){
             { "Username"   , "admin"    },
             { "Password"   , "password" },
-            { "RegisterID" , "1"         }
+            { "RegisterID" , "1"        }
         };
     }
 }

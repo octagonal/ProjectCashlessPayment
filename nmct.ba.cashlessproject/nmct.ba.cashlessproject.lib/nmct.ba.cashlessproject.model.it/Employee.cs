@@ -55,6 +55,14 @@ namespace nmct.ba.cashlessproject.model.it
             get { return  _nationalNumber; }
             set {  _nationalNumber = value; }
         }
+
+	private Boolean _Hidden;
+
+	public Boolean Hidden
+	{
+		get { return _Hidden; }
+		set { _Hidden = value; }
+	}
         
     }
 }
